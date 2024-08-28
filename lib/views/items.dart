@@ -57,7 +57,7 @@ class _ItemsState extends State<Items> {
     if (_hasNextPage &&
         _isFirstLoadRunning == false &&
         _isLoadMoreRunning == false &&
-        _controller.position.extentAfter < 700) {
+        _controller.position.extentAfter < 300) {
       setState(() {
         _isLoadMoreRunning = true; // Display a progress indicator at the bottom
       });
@@ -113,6 +113,7 @@ class _ItemsState extends State<Items> {
             : Column(children: [
                 Expanded(
                     child: ListView.builder(
+                        controller: _controller,
                         itemCount: _items.length,
                         itemBuilder: (BuildContext context, index) {
                           final item = _items[index];
