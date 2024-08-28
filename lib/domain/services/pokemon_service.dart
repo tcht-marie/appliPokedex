@@ -11,7 +11,7 @@ abstract class PokemonService {
 
   Future<List<Version>> getVersions();
 
-  Future<ItemDetails> getItemDetailsById({required int id});
+  Future<List<ItemDetails>> getItemDetailsByPage({required int limit, required int offset});
 
-  Future<MoveDetails> getMoveDetailsById(int id);
+  Future<List<MoveDetails>> getMoveDetailsByPage(int limit, int offset);
 }

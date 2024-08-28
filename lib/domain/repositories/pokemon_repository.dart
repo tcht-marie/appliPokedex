@@ -12,7 +12,7 @@ abstract class PokemonRepository {
 
   Future<List<Version>> findVersions();
 
-  Future<ItemDetails> findItemDetailsById({required int id});
+  Future<List<ItemDetails>> findItemDetailsByPage({required int limit, required int offset});
   
-  Future<MoveDetails> findMoveDetailsById(int id);
+  Future<List<MoveDetails>> findMoveDetailsByPage(int limit, int offset);
 }

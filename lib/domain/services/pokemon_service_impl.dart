@@ -28,13 +28,13 @@ class PokemonServiceImpl implements PokemonService {
   }
 
   @override
-  Future<ItemDetails> getItemDetailsById({required int id}) {
-    return pokemonRepository.findItemDetailsById(id: id);
+  Future<List<ItemDetails>> getItemDetailsByPage({required int limit, required int offset}) {
+    return pokemonRepository.findItemDetailsByPage(limit: limit, offset: offset);
   }
 
   @override
-  Future<MoveDetails> getMoveDetailsById(int id) {
-    return pokemonRepository.findMoveDetailsById(id);
+  Future<List<MoveDetails>> getMoveDetailsByPage(int limit, int offset) {
+    return pokemonRepository.findMoveDetailsByPage(limit, offset);
   }
 
 }

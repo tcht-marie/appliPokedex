@@ -25,10 +25,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
-      home: Items(pokemonService: pokemonService, itemId: 1),
+      //home: Versions(pokemonService: pokemonService),
+      home: Items(pokemonService: pokemonService),
+      /*initialRoute: '/',
+      routes: {
+        '/': (context) => Home(),
+        '/itemdetails': (context) => Items(pokemonService: pokemonService, itemId: 1),
+      },*/
     );
   }
 }
+
+/*MaterialApp.router(
+routerConfig: GoRouter(
+// …
+)
+);*/
 
 /*class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

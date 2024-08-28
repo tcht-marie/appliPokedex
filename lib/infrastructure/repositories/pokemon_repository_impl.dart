@@ -13,7 +13,6 @@ import 'package:poke/infrastructure/models/item_details_infra.dart';
 import 'package:poke/infrastructure/models/move_details_infra.dart';
 import 'package:poke/infrastructure/models/pokemon_infra.dart';
 import 'package:poke/infrastructure/models/version_infra.dart';
-
 import 'mapper/pokemon_mapper.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
@@ -109,46 +108,47 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<ItemDetails> findItemDetailsById({required int id}) async {
-    Response response = await dio.get("/items/$id");
+  Future<List<ItemDetails>> findItemDetailsByPage(
+      {required int limit, required int offset}) async {
+    Response response = await dio.get("/items?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
-      ItemDetailsInfra itemDetailsInfra =
-          ItemDetailsInfra.fromJson(response.data);
-
-      return (
-        spriteUrl: itemDetailsInfra.spriteUrl,
-        name: itemDetailsInfra.name,
-        id: itemDetailsInfra.id,
-        effect: itemDetailsInfra.effect,
-        category: itemDetailsInfra.category
-      );
+      return response.data is List
+          ? (response.data as List<dynamic>)
+              .map<ItemDetailsInfra>(
+                  (element) => ItemDetailsInfra.fromJson(element))
+              .map<ItemDetails>((element) => (
+                    spriteUrl: element.spriteUrl,
+                    name: element.name,
+                    id: element.id,
+                    effect: element.effect,
+                    category: element.category
+                  ))
+              .toList(growable: false)
+          : [];
     } else {
       throw Exception("erreur lors de la récupération des items");
     }
   }
 
   @override
-  Future<MoveDetails> findMoveDetailsById(int id) async {
-    Response response = await dio.get("/moves/$id");
+  Future<List<MoveDetails>> findMoveDetailsByPage(int limit, int offset) async {
+    Response response = await dio.get("/moves?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
-      MoveDetailsInfra moveDetailsInfra =
-          MoveDetailsInfra.fromJson(response.data);
-
-      PokemonTypes pokemonTypes = pokemonMapper
-          .pokemonTypesInfraToPokemonTypes(moveDetailsInfra.pokemonTypes);
-
-      List<Pokemon> pokemons = moveDetailsInfra.pokemons
-          .map((element) => (pokemonMapper.pokemonInfraToPokemon(element)))
-          .toList(growable: false);
-
-      return (
-        name: moveDetailsInfra.name,
-        power: moveDetailsInfra.power,
-        pp: moveDetailsInfra.pp,
-        pokemonTypes: pokemonTypes,
-        flavorText: moveDetailsInfra.flavorText,
-        pokemons: pokemons
-      );
+      return response.data is List
+          ? (response.data as List<dynamic>)
+              .map<MoveDetailsInfra>(
+                  (element) => MoveDetailsInfra.fromJson(element))
+              .map<MoveDetails>((element) => (
+                    name: element.name,
+                    power: element.power,
+                    pp: element.pp,
+                    pokemonTypes: pokemonMapper.pokemonTypesInfraToPokemonTypes(element.pokemonTypes),
+                    flavorText: element.flavorText,
+                    pokemons: element.pokemons
+                        .map((element) => pokemonMapper.pokemonInfraToPokemon(element)).toList(growable: false)
+                  ))
+              .toList(growable: false)
+          : [];
     } else {
       throw Exception("erreur lors de la récupération des moves");
     }
