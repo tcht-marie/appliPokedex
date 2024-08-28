@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poke/config/app_bar_theme.dart';
 import 'package:poke/config/text_theme.dart';
 
 import 'colors.dart';
@@ -19,6 +20,8 @@ class ThemeConfig {
 
     final TextTheme textTheme = TextThemeConfig.textTheme(baseTextTheme, colorScheme);
 
-    return ThemeData(textTheme: textTheme);
+    final AppBarTheme appBarTheme = AppBarThemeConfig.appBarTheme(textTheme);
+
+    return ThemeData(textTheme: textTheme, appBarTheme: appBarTheme);
   }
 }

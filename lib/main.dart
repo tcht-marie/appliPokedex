@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:poke/config/theme.dart';
-import 'package:poke/domain/models/version.dart';
 import 'package:poke/domain/repositories/pokemon_repository.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 import 'package:poke/domain/services/pokemon_service_impl.dart';
 import 'package:poke/infrastructure/repositories/mapper/pokemon_mapper.dart';
 import 'package:poke/infrastructure/repositories/pokemon_repository_impl.dart';
+import 'package:poke/views/items.dart';
 import 'package:poke/views/versions.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
-      home: Versions(pokemonService: pokemonService),
+      home: Items(pokemonService: pokemonService, itemId: 1),
     );
   }
 }
