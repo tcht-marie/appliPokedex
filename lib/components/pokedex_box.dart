@@ -30,12 +30,19 @@ class PokedexBox extends StatelessWidget {
             color: PokedexColors.grayScale[100],
             borderRadius: BorderRadius.circular(8)),
         child: Column(
+          //crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              idLabel,
-              textAlign: TextAlign.end,
-              textDirection: TextDirection.ltr,
-              style: Theme.of(context).textTheme.labelSmall,
+            Flex(
+              direction: Axis.horizontal,
+              textDirection: TextDirection.rtl,
+              children: [
+                Text(
+                  idLabel,
+                  textAlign: TextAlign.end,
+                  textDirection: TextDirection.ltr,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
             ),
             Expanded(
                 child: Image.network(
@@ -45,14 +52,13 @@ class PokedexBox extends StatelessWidget {
               height: 72,
             )),
             Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
               child: Text(name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: '${Theme.of(context).textTheme.bodySmall}',
                   )),
-              ),
+            ),
           ],
         ));
   }
