@@ -26,10 +26,9 @@ class TextThemeConfig {
       fontSize: 16,
     );
 
-    final body3 = TextStyle(
+    const body3 = TextStyle(
       height: 10.0 / 16.0,
       fontSize: 16,
-      color: colorScheme.primary,
     );
 
     const body2 = TextStyle(

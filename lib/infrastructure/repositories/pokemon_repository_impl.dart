@@ -16,17 +16,19 @@ import 'package:poke/infrastructure/models/version_infra.dart';
 import 'mapper/pokemon_mapper.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
+  // initialisation de Dio avec l'url de base
   final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080/pokemons'));
 
   final PokemonMapper pokemonMapper;
 
+  // constructeur
   PokemonRepositoryImpl(this.pokemonMapper);
 
   @override
   Future<List<Pokemon>> findPokemonsByPage(
       {required int limit, required int offset}) async {
     Response response =
-        // appel au back (baseUrl) pour récup pokedex
+        // appel au back (baseUrl) pour récup pokemon avec pagination
         await dio.get("", queryParameters: {"limit": limit, "offset": offset});
     // si appel ok et non null
     if (response.statusCode == 200 && response.data != null) {
@@ -34,7 +36,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
       return response.data is List
           // alors on les traite comme une liste (== liste d'objet json)
           ? (response.data as List<dynamic>)
-              // pour chaque objet de la liste, on le trasnforme en pokemonInfra
+              // transformation de chaque élément json en objet pokemonInfra
               .map<PokemonInfra>((element) => PokemonInfra.fromJson(element))
               // transforme chaque pokemonInfra en pokemon (domain)
               .map<Pokemon>((element) => (
@@ -45,7 +47,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
                   ))
               // convertit en liste (taille fixe)
               .toList(growable: false)
-          // sinon return une liste vide
+          // sinon return une liste vide (si les data ne sont pas une liste)
           : [];
     } else {
       throw Exception("erreur lors de la récupération du pokedex");
@@ -54,16 +56,20 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<CompletePokemon> findPokemonById({required int id}) async {
+    // appel au back pour recup un pokemon par son id
     Response response = await dio.get("/pokemon/$id");
     if (response.statusCode == 200 && response.data != null) {
+      // transformation des data jason en objet CompletePokemonInfra
       CompletePokemonInfra completePokemonInfra =
           CompletePokemonInfra.fromJson(response.data);
 
+      // transformation des types de pokemon
       List<PokemonTypes> pokemonTypes = completePokemonInfra.pokemonTypes
           .map((element) =>
               pokemonMapper.pokemonTypesInfraToPokemonTypes(element))
           .toList(growable: false);
 
+      // transformation des stats de pokemon
       List<PokemonStat> pokemonStat = completePokemonInfra.pokemonStat
           .map((element) => (
                 baseStat: element.baseStat,
@@ -72,9 +78,11 @@ class PokemonRepositoryImpl implements PokemonRepository {
               ))
           .toList(growable: false);
 
+      // transformation de la chaine d'evolution
       EvolutionChain evoChain = pokemonMapper
           .evoChainInfraToEvoChain(completePokemonInfra.evolutionChain);
 
+      // return un objet CompletePokemon avec toutes les data transformées
       return (
         id: completePokemonInfra.id,
         idLabel: completePokemonInfra.idLabel,
@@ -94,13 +102,19 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<List<Version>> findVersions() async {
+    // appel au back pour récup les versions
     Response response = await dio.get("/versions");
     if (response.statusCode == 200 && response.data != null) {
+      // si les données sont une liste
       return response.data is List
           ? (response.data as List<dynamic>)
+              // transformation de chaque élément json en VersionInfra
               .map<VersionInfra>((element) => VersionInfra.fromJson(element))
+              // transformation de chaque VersionInfra en Version (domain)
               .map<Version>((element) => (name: element.name, url: element.url))
+              // conversion en liste fixe
               .toList(growable: false)
+          // si les données ne sont pas une liste, return une liste vide
           : [];
     } else {
       throw Exception("erreur lors de la récupération des versions");
@@ -108,8 +122,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<List<ItemDetails>> findItemDetailsByPage(
-      {required int limit, required int offset}) async {
+  Future<List<ItemDetails>> findItemDetailsByPage({required int limit, required int offset}) async {
+    // appel au back pour récup la liste des ItemDetails avec pagination
     Response response = await dio.get("/items?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
@@ -132,6 +146,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<List<MoveDetails>> findMoveDetailsByPage(int limit, int offset) async {
+    // appel au back pour récup une liste de MoveDetails avec pagination
     Response response = await dio.get("/moves?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List

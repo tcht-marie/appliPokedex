@@ -21,12 +21,12 @@ Map<String, dynamic> _$$PokemonStatInfraImplToJson(
     };
 
 const _$StatNameInfraEnumMap = {
-  StatNameInfra.hp: 'hp',
-  StatNameInfra.atk: 'atk',
-  StatNameInfra.def: 'def',
-  StatNameInfra.satk: 'satk',
-  StatNameInfra.sdef: 'sdef',
-  StatNameInfra.spd: 'spd',
-  StatNameInfra.acc: 'acc',
-  StatNameInfra.eva: 'eva',
+  StatNameInfra.hp: 'HP',
+  StatNameInfra.atk: 'ATK',
+  StatNameInfra.def: 'DEF',
+  StatNameInfra.satk: 'SATK',
+  StatNameInfra.sdef: 'SDEF',
+  StatNameInfra.spd: 'SPD',
+  StatNameInfra.acc: 'ACC',
+  StatNameInfra.eva: 'EVA',
 };

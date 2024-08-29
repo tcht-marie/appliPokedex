@@ -1,13 +1,21 @@
 
-enum StatNameInfra {
-  hp("HP"),
-  atk("ATK"),
-  def("DEF"),
-  satk("SATK"),
-  sdef("SDEF"),
-  spd("SPD"),
-  acc("ACC"),
-  eva("EVA");
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  const StatNameInfra(String value);
+enum StatNameInfra {
+  @JsonValue("HP")
+  hp,
+  @JsonValue("ATK")
+  atk,
+  @JsonValue("DEF")
+  def,
+  @JsonValue("SATK")
+  satk,
+  @JsonValue("SDEF")
+  sdef,
+  @JsonValue("SPD")
+  spd,
+  @JsonValue("ACC")
+  acc,
+  @JsonValue("EVA")
+  eva;
 }

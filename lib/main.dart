@@ -6,6 +6,8 @@ import 'package:poke/domain/services/pokemon_service_impl.dart';
 import 'package:poke/infrastructure/repositories/mapper/pokemon_mapper.dart';
 import 'package:poke/infrastructure/repositories/pokemon_repository_impl.dart';
 import 'package:poke/views/items.dart';
+import 'package:poke/views/moves.dart';
+import 'package:poke/views/pokedex.dart';
 import 'package:poke/views/versions.dart';
 
 void main() {
@@ -19,28 +21,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PokemonMapper pokemonMapper = PokemonMapper();
-    final PokemonRepository pokemonRepository = PokemonRepositoryImpl(pokemonMapper);
+    final PokemonRepository pokemonRepository =
+        PokemonRepositoryImpl(pokemonMapper);
     final PokemonService pokemonService = PokemonServiceImpl(pokemonRepository);
 
     return MaterialApp(
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
       //home: Versions(pokemonService: pokemonService),
-      home: Items(pokemonService: pokemonService),
-      /*initialRoute: '/',
-      routes: {
-        '/': (context) => Home(),
-        '/itemdetails': (context) => Items(pokemonService: pokemonService, itemId: 1),
-      },*/
+      //home: Items(pokemonService: pokemonService),
+      //home: Moves(pokemonService: pokemonService),
+      home: Pokedex(pokemonService: pokemonService),
     );
   }
 }
 
-/*MaterialApp.router(
-routerConfig: GoRouter(
-// …
-)
-);*/
+/*
+  GoRouter router = GoRouter (
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => HomeScreen()
+      ),
+      GoRoute(
+        path: '/versions',
+        builder: (context, state) => Versions(pokemonService: pokemonService)
+      ),
+      GoRoute(
+        path: '/items',
+        builder: (context, state) => ItemDetails(pokemonService: pokemonService)
+      )
+    ],
+  );
+
+  MaterialApp.router(
+    routerConfig: router
+  )
+
+  // Navigation
+  ElevatedButton(
+    child: const Text('Home'),
+    onPressed: () => GoRouter.of(context).go('/')
+OU  onPressed: () => context.go('/')
+  )
+*/
+
+
+
 
 /*class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

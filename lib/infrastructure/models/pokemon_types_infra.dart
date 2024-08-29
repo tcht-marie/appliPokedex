@@ -1,26 +1,45 @@
 
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 enum PokemonTypesInfra {
-  normal("NORMAL"),
-  fighting("FIGHTING"),
-  flying("FLYING"),
-  poison("POISON"),
-  ground("GROUND"),
-  rock("ROCK"),
-  bug("BUG"),
-  ghost("GHOST"),
-  steel("STEEL"),
-  fire("FIRE"),
-  water("WATER"),
-  grass("GRASS"),
-  electric("ELECTRIC"),
-  psychic("PSYCHIC"),
-  ice("ICE"),
-  dragon("DRAGON"),
-  dark("DARK"),
-  fairy("FAIRY"),
-  stellar("STELLAR"),
-  shadow("SHADOW");
-
-  const PokemonTypesInfra(String value);
-
+  @JsonValue("NORMAL")
+  normal,
+  @JsonValue("FIGHTING")
+  fighting,
+  @JsonValue("FLYING")
+  flying,
+  @JsonValue("POISON")
+  poison,
+  @JsonValue("GROUND")
+  ground,
+  @JsonValue("ROCK")
+  rock,
+  @JsonValue("BUG")
+  bug,
+  @JsonValue("GHOST")
+  ghost,
+  @JsonValue("STEEL")
+  steel,
+  @JsonValue("FIRE")
+  fire,
+  @JsonValue("WATER")
+  water,
+  @JsonValue("GRASS")
+  grass,
+  @JsonValue("ELECTRIC")
+  electric,
+  @JsonValue("PSYCHIC")
+  psychic,
+  @JsonValue("ICE")
+  ice,
+  @JsonValue("DRAGON")
+  dragon,
+  @JsonValue("DARK")
+  dark,
+  @JsonValue("FAIRY")
+  fairy,
+  @JsonValue("STELLAR")
+  stellar,
+  @JsonValue("SHADOW")
+  shadow;
 }
