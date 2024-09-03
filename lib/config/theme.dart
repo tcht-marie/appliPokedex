@@ -22,6 +22,6 @@ class ThemeConfig {
 
     final AppBarTheme appBarTheme = AppBarThemeConfig.appBarTheme(textTheme);
 
-    return ThemeData(textTheme: textTheme, appBarTheme: appBarTheme);
+    return ThemeData(textTheme: textTheme, appBarTheme: appBarTheme, useMaterial3: true);
   }
 }

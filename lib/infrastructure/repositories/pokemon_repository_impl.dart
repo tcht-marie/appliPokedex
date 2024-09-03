@@ -90,6 +90,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
         weight: completePokemonInfra.weight,
         cries: completePokemonInfra.cries,
         height: completePokemonInfra.height,
+        imageUrl: completePokemonInfra.imageUrl,
+        flavorText: completePokemonInfra.flavorText,
         pokemonTypes: pokemonTypes,
         pokemonStat: pokemonStat,
         abilities: completePokemonInfra.abilities,

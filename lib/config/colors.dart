@@ -1,10 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:poke/domain/models/pokemon_types.dart';
 
 Color hexToColor(String hex) {
   assert(RegExp(r'^#([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$').hasMatch(hex),
-  'hex color must be #rrggbb or #rrggbbaa');
+      'hex color must be #rrggbb or #rrggbbaa');
 
   return Color(
     int.parse(hex.substring(1), radix: 16) +
@@ -13,6 +14,32 @@ Color hexToColor(String hex) {
 }
 
 class PokedexColors {
+
+  static Color colorTypes(PokemonTypes pokeTypes) {
+    return switch (pokeTypes) {
+      PokemonTypes.bug => bug,
+      PokemonTypes.dark => dark,
+      PokemonTypes.dragon => dragon,
+      PokemonTypes.electric => electric,
+      PokemonTypes.fairy => fairy,
+      PokemonTypes.fighting => fighting,
+      PokemonTypes.fire => fire,
+      PokemonTypes.flying => flying,
+      PokemonTypes.ghost => ghost,
+      PokemonTypes.normal => normal,
+      PokemonTypes.grass => grass,
+      PokemonTypes.ground => ground,
+      PokemonTypes.ice => ice,
+      PokemonTypes.poison => poison,
+      PokemonTypes.psychic => psychic,
+      PokemonTypes.rock => rock,
+      PokemonTypes.steel => steel,
+      PokemonTypes.stellar => stellar,
+      PokemonTypes.shadow => dark,
+      PokemonTypes.water => water,
+    };
+  }
+
   static Color identity = hexToColor('#DC0A2D');
   static Color bug = hexToColor('#A7B723');
   static Color dark = hexToColor('#75574C');
@@ -31,6 +58,7 @@ class PokedexColors {
   static Color psychic = hexToColor('#FB5584');
   static Color rock = hexToColor('#B69E31');
   static Color steel = hexToColor('#B7B9D0');
+  static Color stellar = hexToColor('#00e6e6');
   static Color water = hexToColor('#6493EB');
 
   static ColorSwatch grayScale = ColorSwatch(hexToColor('#E0E0E0').value, {

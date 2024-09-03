@@ -9,5 +9,7 @@ enum StatName {
   acc("ACC"),
   eva("EVA");
 
-  const StatName(String value);
+  final String value;
+
+  const StatName(this.value);
 }

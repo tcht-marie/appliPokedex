@@ -23,9 +23,11 @@ mixin _$CompletePokemonInfra {
   int get id => throw _privateConstructorUsedError;
   String get idLabel => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get weight => throw _privateConstructorUsedError;
+  String get weight => throw _privateConstructorUsedError;
   String get cries => throw _privateConstructorUsedError;
-  int get height => throw _privateConstructorUsedError;
+  String get height => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
+  String get flavorText => throw _privateConstructorUsedError;
   List<PokemonTypesInfra> get pokemonTypes =>
       throw _privateConstructorUsedError;
   List<PokemonStatInfra> get pokemonStat => throw _privateConstructorUsedError;
@@ -52,9 +54,11 @@ abstract class $CompletePokemonInfraCopyWith<$Res> {
       {int id,
       String idLabel,
       String name,
-      int weight,
+      String weight,
       String cries,
-      int height,
+      String height,
+      String imageUrl,
+      String flavorText,
       List<PokemonTypesInfra> pokemonTypes,
       List<PokemonStatInfra> pokemonStat,
       List<String> abilities,
@@ -85,6 +89,8 @@ class _$CompletePokemonInfraCopyWithImpl<$Res,
     Object? weight = null,
     Object? cries = null,
     Object? height = null,
+    Object? imageUrl = null,
+    Object? flavorText = null,
     Object? pokemonTypes = null,
     Object? pokemonStat = null,
     Object? abilities = null,
@@ -106,7 +112,7 @@ class _$CompletePokemonInfraCopyWithImpl<$Res,
       weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       cries: null == cries
           ? _value.cries
           : cries // ignore: cast_nullable_to_non_nullable
@@ -114,7 +120,15 @@ class _$CompletePokemonInfraCopyWithImpl<$Res,
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      flavorText: null == flavorText
+          ? _value.flavorText
+          : flavorText // ignore: cast_nullable_to_non_nullable
+              as String,
       pokemonTypes: null == pokemonTypes
           ? _value.pokemonTypes
           : pokemonTypes // ignore: cast_nullable_to_non_nullable
@@ -157,9 +171,11 @@ abstract class _$$CompletePokemonInfraImplCopyWith<$Res>
       {int id,
       String idLabel,
       String name,
-      int weight,
+      String weight,
       String cries,
-      int height,
+      String height,
+      String imageUrl,
+      String flavorText,
       List<PokemonTypesInfra> pokemonTypes,
       List<PokemonStatInfra> pokemonStat,
       List<String> abilities,
@@ -188,6 +204,8 @@ class __$$CompletePokemonInfraImplCopyWithImpl<$Res>
     Object? weight = null,
     Object? cries = null,
     Object? height = null,
+    Object? imageUrl = null,
+    Object? flavorText = null,
     Object? pokemonTypes = null,
     Object? pokemonStat = null,
     Object? abilities = null,
@@ -209,7 +227,7 @@ class __$$CompletePokemonInfraImplCopyWithImpl<$Res>
       weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       cries: null == cries
           ? _value.cries
           : cries // ignore: cast_nullable_to_non_nullable
@@ -217,7 +235,15 @@ class __$$CompletePokemonInfraImplCopyWithImpl<$Res>
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      flavorText: null == flavorText
+          ? _value.flavorText
+          : flavorText // ignore: cast_nullable_to_non_nullable
+              as String,
       pokemonTypes: null == pokemonTypes
           ? _value._pokemonTypes
           : pokemonTypes // ignore: cast_nullable_to_non_nullable
@@ -248,6 +274,8 @@ class _$CompletePokemonInfraImpl implements _CompletePokemonInfra {
       required this.weight,
       required this.cries,
       required this.height,
+      required this.imageUrl,
+      required this.flavorText,
       required final List<PokemonTypesInfra> pokemonTypes,
       required final List<PokemonStatInfra> pokemonStat,
       required final List<String> abilities,
@@ -266,11 +294,15 @@ class _$CompletePokemonInfraImpl implements _CompletePokemonInfra {
   @override
   final String name;
   @override
-  final int weight;
+  final String weight;
   @override
   final String cries;
   @override
-  final int height;
+  final String height;
+  @override
+  final String imageUrl;
+  @override
+  final String flavorText;
   final List<PokemonTypesInfra> _pokemonTypes;
   @override
   List<PokemonTypesInfra> get pokemonTypes {
@@ -300,7 +332,7 @@ class _$CompletePokemonInfraImpl implements _CompletePokemonInfra {
 
   @override
   String toString() {
-    return 'CompletePokemonInfra(id: $id, idLabel: $idLabel, name: $name, weight: $weight, cries: $cries, height: $height, pokemonTypes: $pokemonTypes, pokemonStat: $pokemonStat, abilities: $abilities, evolutionChain: $evolutionChain)';
+    return 'CompletePokemonInfra(id: $id, idLabel: $idLabel, name: $name, weight: $weight, cries: $cries, height: $height, imageUrl: $imageUrl, flavorText: $flavorText, pokemonTypes: $pokemonTypes, pokemonStat: $pokemonStat, abilities: $abilities, evolutionChain: $evolutionChain)';
   }
 
   @override
@@ -314,6 +346,10 @@ class _$CompletePokemonInfraImpl implements _CompletePokemonInfra {
             (identical(other.weight, weight) || other.weight == weight) &&
             (identical(other.cries, cries) || other.cries == cries) &&
             (identical(other.height, height) || other.height == height) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.flavorText, flavorText) ||
+                other.flavorText == flavorText) &&
             const DeepCollectionEquality()
                 .equals(other._pokemonTypes, _pokemonTypes) &&
             const DeepCollectionEquality()
@@ -334,6 +370,8 @@ class _$CompletePokemonInfraImpl implements _CompletePokemonInfra {
       weight,
       cries,
       height,
+      imageUrl,
+      flavorText,
       const DeepCollectionEquality().hash(_pokemonTypes),
       const DeepCollectionEquality().hash(_pokemonStat),
       const DeepCollectionEquality().hash(_abilities),
@@ -362,9 +400,11 @@ abstract class _CompletePokemonInfra implements CompletePokemonInfra {
           {required final int id,
           required final String idLabel,
           required final String name,
-          required final int weight,
+          required final String weight,
           required final String cries,
-          required final int height,
+          required final String height,
+          required final String imageUrl,
+          required final String flavorText,
           required final List<PokemonTypesInfra> pokemonTypes,
           required final List<PokemonStatInfra> pokemonStat,
           required final List<String> abilities,
@@ -381,11 +421,15 @@ abstract class _CompletePokemonInfra implements CompletePokemonInfra {
   @override
   String get name;
   @override
-  int get weight;
+  String get weight;
   @override
   String get cries;
   @override
-  int get height;
+  String get height;
+  @override
+  String get imageUrl;
+  @override
+  String get flavorText;
   @override
   List<PokemonTypesInfra> get pokemonTypes;
   @override

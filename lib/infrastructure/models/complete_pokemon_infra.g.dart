@@ -12,9 +12,11 @@ _$CompletePokemonInfraImpl _$$CompletePokemonInfraImplFromJson(
       id: (json['id'] as num).toInt(),
       idLabel: json['idLabel'] as String,
       name: json['name'] as String,
-      weight: (json['weight'] as num).toInt(),
+      weight: json['weight'] as String,
       cries: json['cries'] as String,
-      height: (json['height'] as num).toInt(),
+      height: json['height'] as String,
+      imageUrl: json['imageUrl'] as String,
+      flavorText: json['flavorText'] as String,
       pokemonTypes: (json['pokemonTypes'] as List<dynamic>)
           .map((e) => $enumDecode(_$PokemonTypesInfraEnumMap, e))
           .toList(),
@@ -36,6 +38,8 @@ Map<String, dynamic> _$$CompletePokemonInfraImplToJson(
       'weight': instance.weight,
       'cries': instance.cries,
       'height': instance.height,
+      'imageUrl': instance.imageUrl,
+      'flavorText': instance.flavorText,
       'pokemonTypes': instance.pokemonTypes
           .map((e) => _$PokemonTypesInfraEnumMap[e]!)
           .toList(),

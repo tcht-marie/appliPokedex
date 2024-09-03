@@ -21,5 +21,6 @@ enum PokemonTypes {
   stellar("Stellar"),
   shadow("Shadow");
 
-  const PokemonTypes(String value);
+  final  String value;
+  const PokemonTypes(this.value);
 }
