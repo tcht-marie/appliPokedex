@@ -20,14 +20,17 @@ class Features extends StatelessWidget {
                   Icon(iconData),
                   Wrap(
                     children: features
-                        .map((feature) => Text(feature))
+                        .map((feature) => Text(
+                            style: Theme.of(context).textTheme.bodySmall,
+                            feature))
                         .toList(growable: false),
                   ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30),
-                child: Text(label),
+                child:
+                    Text(style: Theme.of(context).textTheme.labelSmall, label),
               ),
             ],
           )
@@ -36,13 +39,14 @@ class Features extends StatelessWidget {
               Wrap(
                 runSpacing: 10,
                 children: features
-                    .map((feature) =>
-                        Text(style: TextStyle(), feature))
+                    .map((feature) => Text(
+                        style: Theme.of(context).textTheme.bodySmall, feature))
                     .toList(growable: false),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: Text(label),
+                child:
+                    Text(style: Theme.of(context).textTheme.labelSmall, label),
               ),
             ],
           );

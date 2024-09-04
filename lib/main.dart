@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poke/components/linear_stat.dart';
 import 'package:poke/config/theme.dart';
 import 'package:poke/domain/repositories/pokemon_repository.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
       //home: Items(pokemonService: pokemonService),
       //home: Moves(pokemonService: pokemonService),
       //home: Pokedex(pokemonService: pokemonService),
-      home: PokemonComplete(pokemonService: pokemonService, pokemonId: 4),
+      home: PokemonComplete(pokemonService: pokemonService, pokemonId: 12),
+      //home: const LinearStat(),
     );
   }
 }
