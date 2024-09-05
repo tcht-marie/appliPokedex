@@ -5,6 +5,7 @@ import 'package:poke/domain/services/pokemon_service.dart';
 import 'package:poke/domain/services/pokemon_service_impl.dart';
 import 'package:poke/infrastructure/repositories/mapper/pokemon_mapper.dart';
 import 'package:poke/infrastructure/repositories/pokemon_repository_impl.dart';
+import 'package:poke/views/pokedex.dart';
 import 'package:poke/views/pokemon.dart';
 
 void main() {
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
       //home: Versions(pokemonService: pokemonService),
       //home: Items(pokemonService: pokemonService),
       //home: Moves(pokemonService: pokemonService),
-      //home: Pokedex(pokemonService: pokemonService),
-      home: PokemonComplete(pokemonService: pokemonService, pokemonId: 104),
+      home: Pokedex(pokemonService: pokemonService),
+      //home: PokemonComplete(pokemonService: pokemonService, pokemonId: 104),
       //home: const LinearStat(),
     );
   }

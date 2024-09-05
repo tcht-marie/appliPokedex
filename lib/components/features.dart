@@ -43,6 +43,7 @@ class Features extends StatelessWidget {
           )
         : Column(
             children: [
+              //TODO : problème affichage avec un ou plusieurs moves
               Wrap(
                 runSpacing: 10,
                 children: features

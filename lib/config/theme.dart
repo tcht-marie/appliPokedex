@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:poke/config/app_bar_theme.dart';
 import 'package:poke/config/text_theme.dart';
 
@@ -19,9 +19,11 @@ class ThemeConfig {
         surface: PokedexColors.grayScale[100]!
     );
 
-    final TextTheme textTheme = GoogleFonts.poppinsTextTheme(
+    /*final TextTheme textTheme = GoogleFonts.poppinsTextTheme(
       TextThemeConfig.textTheme(baseTextTheme, colorScheme),
-    );
+    );*/
+
+    final TextTheme textTheme = TextThemeConfig.textTheme(baseTextTheme, colorScheme);
 
     final AppBarTheme appBarTheme = AppBarThemeConfig.appBarTheme(textTheme);
 

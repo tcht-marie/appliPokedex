@@ -108,17 +108,19 @@ class _PokedexState extends State<Pokedex> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Pokedex",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
+      appBar: AppBar(
+        title: Text(
+          "Pokedex",
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        body: _isFirstLoadRunning
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(
+      ),
+      body: _isFirstLoadRunning
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
+              child: Column(
                 children: [
                   Expanded(
                     child: GridView.builder(
@@ -144,6 +146,8 @@ class _PokedexState extends State<Pokedex> {
                       ),
                     )
                 ],
-              ));
+              ),
+            ),
+    );
   }
 }
