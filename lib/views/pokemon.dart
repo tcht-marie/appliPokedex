@@ -86,7 +86,7 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                             Expanded(
                                 flex: 0,
                                 child: Image.network(
-                                    width: 200, height: 200, pokemon.imageUrl)),
+                                    width: 230, height: 230, pokemon.imageUrl)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -110,22 +110,35 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                               "About",
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 6.0, horizontal: 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Expanded(
                                     child: Features(
-                                        iconData: Icons.monitor_weight_outlined,
+                                        iconData: Icons.scale_outlined,
                                         features: ['${pokemon.weight} kg'],
                                         label: "Weight"),
                                   ),
+                                  Container(
+                                    width: 1.5,
+                                    height: 70,
+                                    color: PokedexColors.grayScale[050],
+                                    //margin: const EdgeInsets.symmetric(horizontal: 10),
+                                  ),
                                   Expanded(
                                     child: Features(
-                                        iconData: Icons.straighten,
+                                        iconData: Icons.height_outlined,
                                         features: ['${pokemon.height} m'],
                                         label: "Height"),
+                                  ),
+                                  Container(
+                                    width: 1.5,
+                                    height: 70,
+                                    color: PokedexColors.grayScale[050],
+                                    //margin: const EdgeInsets.symmetric(horizontal: 10),
                                   ),
                                   Expanded(
                                     child: Features(
@@ -138,7 +151,7 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Text(
-                                textAlign: TextAlign.center,
+                                  textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -157,9 +170,12 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                                           pokemon.pokemonTypes.first),
                                     ),
                                 "Base Stats"),
-                            StatPokemon(
-                                pokemonStats: pokemon.pokemonStat,
-                                types: pokemon.pokemonTypes.first),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 15),
+                              child: StatPokemon(
+                                  pokemonStats: pokemon.pokemonStat,
+                                  types: pokemon.pokemonTypes.first),
+                            ),
                           ],
                         ),
                       ),

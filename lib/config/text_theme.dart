@@ -23,7 +23,7 @@ class TextThemeConfig {
     const subtitle1 = TextStyle(
       fontWeight: FontWeight.w700,
       height: 14.0 / 16.0,
-      fontSize: 16,
+      fontSize: 18,
     );
 
     const body3 = TextStyle(

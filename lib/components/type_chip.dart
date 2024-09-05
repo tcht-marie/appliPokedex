@@ -11,10 +11,11 @@ class TypeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-        backgroundColor: PokedexColors.colorTypes(type),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
-        side: const BorderSide(width: 0),
-        label: Text(style: Theme.of(context).textTheme.titleSmall, type.value),
-      );
+      backgroundColor: PokedexColors.colorTypes(type),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      side: const BorderSide(width: 0),
+      label: Text(style: Theme.of(context).textTheme.titleSmall, type.value),
+    );
   }
 }

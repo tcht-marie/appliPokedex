@@ -16,12 +16,19 @@ class Features extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(iconData),
+                children: <Widget>[
+                  //TODO ajout padding entre icon et text
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 7),
+                    child: Icon(size: 19, iconData),
+                  ),
                   Wrap(
                     children: features
                         .map((feature) => Text(
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontSize: 14,
+                                    ),
                             feature))
                         .toList(growable: false),
                   ),
@@ -39,8 +46,17 @@ class Features extends StatelessWidget {
               Wrap(
                 runSpacing: 10,
                 children: features
-                    .map((feature) => Text(
-                        style: Theme.of(context).textTheme.bodySmall, feature))
+                    .map((feature) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Text(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    fontSize: 14,
+                                  ),
+                              feature),
+                        ))
                     .toList(growable: false),
               ),
               Padding(

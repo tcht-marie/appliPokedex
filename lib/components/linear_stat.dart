@@ -10,7 +10,9 @@ class LinearStat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
+    return Stack(
+      alignment: AlignmentDirectional.centerStart,
+        children: [
       LinearProgressIndicator(
         value: 1,
         color: PokedexColors.colorTypes(types).withOpacity(0.2),
