@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/components/list_item.dart';
+import 'package:poke/components/type_chip.dart';
+import 'package:poke/config/colors.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
 import '../domain/models/move_details.dart';
@@ -108,7 +111,7 @@ class _MovesState extends State<Moves> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Move Details",
+            "Moves",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
@@ -119,6 +122,7 @@ class _MovesState extends State<Moves> {
             : Column(children: [
                 Expanded(
                     child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
                         // controller
                         controller: _controller,
                         // nombre d'éléments dans la liste
@@ -126,12 +130,22 @@ class _MovesState extends State<Moves> {
                         itemBuilder: (BuildContext context, index) {
                           final move = _moves[index];
                           return ExpansionTile(
-                            title: Text(move.name),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            title: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                  move.name),
+                            ),
+                            controlAffinity: ListTileControlAffinity.leading,
+                            trailing: TypeChip(type: move.pokemonTypes),
                             children: <Widget>[
-                              ListTile(title: Text('Power : ${move.power}')),
-                              ListTile(title: Text('PP: ${move.pp}')),
-                              ListTile(
-                                  title: Text('Flavor = ${move.flavorText}')),
+                              ListItem(
+                                  item: 'Power : ${move.power.toString()}'),
+                              ListItem(item: 'PP : ${move.pp.toString()}'),
+                              ListItem(item: move.flavorText),
                             ],
                           );
                         })),

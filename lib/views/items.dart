@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/components/list_item.dart';
 import 'package:poke/domain/models/item_details.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
@@ -141,11 +142,12 @@ class _ItemsState extends State<Items> {
                           final item = _items[index];
                           return ExpansionTile(
                             leading: Image.network(item.spriteUrl),
-                            title: Text(item.name),
+                            title: Text(
+                                style: Theme.of(context).textTheme.titleMedium,
+                                item.name),
                             children: <Widget>[
-                              ListTile(title: Text(item.effect)),
-                              ListTile(
-                                  title: Text('Category: ${item.category}')),
+                              ListItem(item: item.effect),
+                              ListItem(item: 'Category: ${item.category}'),
                             ],
                           );
                         })),
