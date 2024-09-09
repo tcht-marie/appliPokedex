@@ -16,7 +16,6 @@ class Versions extends StatelessWidget {
           title: Text(
             "Versions",
             // TODO : voir pour ne pas devoir surcharger le style ici (AppBarTheme)
-            // TODO flutter inspector
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
@@ -25,19 +24,16 @@ class Versions extends StatelessWidget {
             builder:
                 (BuildContext context, AsyncSnapshot<List<Version>> snapshot) {
               if (snapshot.hasData) {
-                return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                      ),
-                      itemBuilder: (BuildContext context, index) {
-                        final version = snapshot.data![index];
-                        return VersionBox(name: version.name, url: version.url);
-                      },
-                      itemCount: snapshot.data?.length,
-                    ));
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (BuildContext context, index) {
+                    final version = snapshot.data![index];
+                    return VersionBox(name: version.name, url: version.url);
+                  },
+                  itemCount: snapshot.data?.length,
+                );
               } else if (snapshot.hasError) {
                 return const Text('Error loading versions');
               } else {

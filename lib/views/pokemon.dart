@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/components/evo_species.dart';
 import 'package:poke/components/features.dart';
 import 'package:poke/components/type_chip.dart';
 import 'package:poke/config/colors.dart';
@@ -64,18 +65,14 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        height: 650,
+                        height: 530,
                         child: Container(
                             margin: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 5),
                             decoration: BoxDecoration(
                               color: PokedexColors.grayScale[100],
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20),
-                                bottomLeft: Radius.circular(50),
-                                bottomRight: Radius.circular(50),
-                              ),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(15)),
                             ))),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -174,13 +171,27 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                                 pokemonStats: pokemon.pokemonStat,
                                 types: pokemon.pokemonTypes.first),
                           ),
+                          ElevatedButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Expanded(
+                                        child: EvoSpecies(
+                                            evolvesTo: pokemon
+                                                .evolutionChain.evolvesTo),
+                                      );
+                                    });
+                              },
+                              child: const Text('Evolutions'))
+                          /**/
                         ],
                       ),
                     ),
                   ],
                 )),
             // TODO : si nav bar, changer hauteur background white
-            /*bottomNavigationBar: NavigationBar(
+            bottomNavigationBar: NavigationBar(
               backgroundColor:
                   PokedexColors.colorTypes(pokemon.pokemonTypes.first),
               destinations: const [
@@ -197,7 +208,7 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                   label: 'Versions',
                 ),
               ],
-            ),*/
+            ),
           );
         } else {
           return Scaffold(

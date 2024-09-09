@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Features extends StatelessWidget {
-  //TODO : changer feature en string dans le back + convertir valeur
   final List<String> features;
   final IconData? iconData;
   final String label;
@@ -17,7 +16,6 @@ class Features extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  //TODO ajout padding entre icon et text
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 7),
                     child: Icon(size: 19, iconData),

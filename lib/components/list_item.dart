@@ -21,6 +21,7 @@ class ListItem extends StatelessWidget {
               style: TextStyle(
                 color: PokedexColors.grayScale[100],
                 fontWeight: FontWeight.bold,
+                height: 1.5,
               ),
               textAlign: TextAlign.center,
               item)),

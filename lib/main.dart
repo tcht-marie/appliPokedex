@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
       //home: Versions(pokemonService: pokemonService),
-      home: Items(pokemonService: pokemonService),
+      //home: Items(pokemonService: pokemonService),
       //home: Moves(pokemonService: pokemonService),
       //home: Pokedex(pokemonService: pokemonService),
-      //home: PokemonComplete(pokemonService: pokemonService, pokemonId: 12),
+      home: PokemonComplete(pokemonService: pokemonService, pokemonId: 4),
     );
   }
 }

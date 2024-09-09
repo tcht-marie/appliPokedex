@@ -54,7 +54,7 @@ class PokedexBox extends StatelessWidget {
             child: Container(
               height: 60,
               decoration: BoxDecoration(
-                color: PokedexColors.grayScale[100]?.withOpacity(0.2),
+                color: PokedexColors.grayScale[075],
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
