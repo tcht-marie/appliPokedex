@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/components/evo_chip.dart';
 import 'package:poke/components/evo_species.dart';
 import 'package:poke/components/features.dart';
 import 'package:poke/components/type_chip.dart';
@@ -105,56 +106,47 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                                 ),
                             "About",
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 6.0, horizontal: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Expanded(
-                                  child: Features(
-                                      iconData: Icons.scale_outlined,
-                                      features: ['${pokemon.weight} kg'],
-                                      label: "Weight"),
-                                ),
-                                Container(
-                                  width: 1.5,
-                                  height: 70,
-                                  color: PokedexColors.grayScale[050],
-                                  //margin: const EdgeInsets.symmetric(horizontal: 10),
-                                ),
-                                Expanded(
-                                  child: Features(
-                                      iconData: Icons.height_outlined,
-                                      features: ['${pokemon.height} m'],
-                                      label: "Height"),
-                                ),
-                                Container(
-                                  width: 1.5,
-                                  height: 70,
-                                  color: PokedexColors.grayScale[050],
-                                  //margin: const EdgeInsets.symmetric(horizontal: 10),
-                                ),
-                                Expanded(
-                                  child: Features(
-                                      features: pokemon.abilities,
-                                      label: "Moves"),
-                                ),
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Expanded(
+                                child: Features(
+                                    iconData: Icons.scale_outlined,
+                                    features: ['${pokemon.weight} kg'],
+                                    label: "Weight"),
+                              ),
+                              Container(
+                                width: 1.5,
+                                height: 70,
+                                color: PokedexColors.grayScale[050],
+                              ),
+                              Expanded(
+                                child: Features(
+                                    iconData: Icons.height_outlined,
+                                    features: ['${pokemon.height} m'],
+                                    label: "Height"),
+                              ),
+                              Container(
+                                width: 1.5,
+                                height: 70,
+                                color: PokedexColors.grayScale[050],
+                              ),
+                              Expanded(
+                                child: Features(
+                                    features: pokemon.abilities,
+                                    label: "Moves"),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                      height: 1.5,
-                                    ),
-                                pokemon.flavorText),
-                          ),
+                          Text(
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    height: 1.5,
+                                  ),
+                              pokemon.flavorText),
                           Text(
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
@@ -165,26 +157,10 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                                         pokemon.pokemonTypes.first),
                                   ),
                               "Base Stats"),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: StatPokemon(
-                                pokemonStats: pokemon.pokemonStat,
-                                types: pokemon.pokemonTypes.first),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Expanded(
-                                        child: EvoSpecies(
-                                            evolvesTo: pokemon
-                                                .evolutionChain.evolvesTo),
-                                      );
-                                    });
-                              },
-                              child: const Text('Evolutions'))
-                          /**/
+                          StatPokemon(
+                              pokemonStats: pokemon.pokemonStat,
+                              types: pokemon.pokemonTypes.first),
+                          EvoChip(pokemon: pokemon),
                         ],
                       ),
                     ),

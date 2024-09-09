@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/pokemon.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
@@ -118,34 +119,38 @@ class _PokedexState extends State<Pokedex> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: GridView.builder(
-                      itemCount: _pokemons.length,
-                      controller: _controller,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3),
-                      itemBuilder: (BuildContext context, index) {
-                        final pokedex = _pokemons[index];
-                        return PokedexBox(
-                            name: pokedex.name,
-                            idLabel: pokedex.idLabel,
-                            imageUrl: pokedex.imageUrl);
-                      },
-                    ),
-                  ),
-                  if (_isLoadMoreRunning)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 40),
-                      child: Center(
-                        child: CircularProgressIndicator(),
+          : Container(
+              color: PokedexColors.grayScale[100],
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: GridView.builder(
+                        itemCount: _pokemons.length,
+                        controller: _controller,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                        itemBuilder: (BuildContext context, index) {
+                          final pokedex = _pokemons[index];
+                          return PokedexBox(
+                              name: pokedex.name,
+                              idLabel: pokedex.idLabel,
+                              imageUrl: pokedex.imageUrl);
+                        },
                       ),
-                    )
-                ],
+                    ),
+                    if (_isLoadMoreRunning)
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10, bottom: 40),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                  ],
+                ),
               ),
             ),
     );
