@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:poke/components/evo_chip.dart';
-import 'package:poke/components/evo_species.dart';
 import 'package:poke/components/features.dart';
 import 'package:poke/components/type_chip.dart';
 import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/complete_pokemon.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import '../components/stat_pokemon.dart';
 
@@ -82,8 +82,15 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                         children: [
                           Expanded(
                               flex: 0,
-                              child: Image.network(
-                                  width: 230, height: 230, pokemon.imageUrl)),
+                              /*child: GestureDetector(
+                                onTap: () async {
+                                  //print(pokemon.cries);
+                                  await AudioPlayer().play(UrlSource(pokemon.cries, mimeType: 'audio/ogg'));
+                                },*/
+                                child: Image.network(
+                                    width: 230, height: 230, pokemon.imageUrl),
+                              //)
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

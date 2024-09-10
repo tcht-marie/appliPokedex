@@ -19,6 +19,7 @@ class Pokedex extends StatefulWidget {
 class _PokedexState extends State<Pokedex> {
   static const int _limit = 20;
   late int _offset = 0;
+  String _query = '';
 
   bool _hasNextPage = true;
   bool _isFirstLoadRunning = false;
@@ -48,6 +49,14 @@ class _PokedexState extends State<Pokedex> {
 
   late ScrollController _controller;
 
+  void _searchPokemon(String input) async {
+    final searchQuery = await widget.pokemonService
+        .getPokedexByName(limit: _limit, offset: _offset, query: input);
+    setState(() {
+      _pokemons = searchQuery;
+    });
+  }
+
   // fonction pour charger plus d'éléments lors du scroll
   void _loadMore() async {
     // s'il y a une page suivante &
@@ -66,8 +75,11 @@ class _PokedexState extends State<Pokedex> {
       _offset += _limit;
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
-        final pokedexPage = await widget.pokemonService
-            .getPokemonsByPage(limit: _limit, offset: _offset);
+        final pokedexPage = _query.isEmpty
+            ? await widget.pokemonService
+                .getPokemonsByPage(limit: _limit, offset: _offset)
+            : await widget.pokemonService.getPokedexByName(
+                limit: _limit, offset: _offset, query: _query);
         setState(() {
           // ajout des nouveaux éléments en gardant aussi ceux d'avant
           _pokemons = [..._pokemons, ...pokedexPage];
@@ -115,9 +127,22 @@ class _PokedexState extends State<Pokedex> {
           "Pokedex",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        bottom: const PreferredSize(
-          preferredSize: Size(10, 10),
-          child: SearchPokemon(),
+        bottom: PreferredSize(
+          preferredSize: const Size(10, 10),
+          child: SearchPokemon(
+            setQuery: (input) {
+              setState(() {
+                _query = input;
+              });
+            },
+            search: (input) => _searchPokemon(input),
+            clearQuery: () {
+              setState(() {
+                _query = '';
+              });
+              _firstLoad();
+            },
+          ),
         ),
       ),
       body: _isFirstLoadRunning

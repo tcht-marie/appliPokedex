@@ -24,7 +24,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   // constructeur
   PokemonRepositoryImpl(this.pokemonMapper);
 
-  @override
+  /*@override
   Future<List<Pokemon>> findPokemonsByPage(
       {required int limit, required int offset}) async {
     Response response =
@@ -52,28 +52,49 @@ class PokemonRepositoryImpl implements PokemonRepository {
     } else {
       throw Exception("erreur lors de la récupération du pokedex");
     }
+  }*/
+  @override
+  Future<List<Pokemon>> findPokemonsByPage(
+      {required int limit, required int offset}) async {
+    return _pokemonInfraToPokemon("",
+        queryParameters: {"limit": limit, "offset": offset});
   }
 
-  @override
-  Future<List<Pokemon>> searchPokedexByName(
-      {required int limit, required int offset, required String query}) async {
+  //factorisation pour les deux override : findPokemonsByPage & searchPokedexByName
+  Future<List<Pokemon>> _pokemonInfraToPokemon(String endPoint,
+      {Map<String, dynamic>? queryParameters}) async {
     Response response =
-        await dio.get("/search?limit=$limit&offset=$offset&query=$query");
+        // appel au back avec en paramètre un endpoint et des queryparams
+        await dio.get(endPoint, queryParameters: queryParameters);
+    // si appel ok et non null
     if (response.statusCode == 200 && response.data != null) {
+      // si les data sont une liste
       return response.data is List
+          //on les traîte comme une liste (== liste d'objet json)
           ? (response.data as List<dynamic>)
-              .map((element) => PokemonInfra.fromJson(element))
+              // transformation de chaque éléments json en objet pokemonInfra
+              .map<PokemonInfra>((element) => PokemonInfra.fromJson(element))
+              // transformation de pokemonInfra en Pokemon
               .map<Pokemon>((element) => (
                     id: element.id,
                     idLabel: element.idLabel,
                     name: element.name,
                     imageUrl: element.imageUrl
                   ))
+              // convertit en liste
               .toList(growable: false)
+          // si data null = retourne une liste vide
           : [];
     } else {
       throw Exception("erreur lors de la récupération du pokedex");
     }
+  }
+
+  @override
+  Future<List<Pokemon>> searchPokedexByName(
+      {required int limit, required int offset, required String query}) async {
+    return _pokemonInfraToPokemon("/search",
+        queryParameters: {"limit": limit, "offset": offset, "query": query});
   }
 
   @override
