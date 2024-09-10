@@ -8,6 +8,8 @@ import '../models/version.dart';
 abstract class PokemonRepository {
   Future<List<Pokemon>> findPokemonsByPage({required int limit, required int offset});
 
+  Future<List<Pokemon>> searchPokedexByName({required int limit, required int offset, required String query});
+
   Future<CompletePokemon> findPokemonById({required int id});
 
   Future<List<Version>> findVersions();

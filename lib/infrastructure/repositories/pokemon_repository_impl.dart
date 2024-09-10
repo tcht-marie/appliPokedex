@@ -55,6 +55,28 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
+  Future<List<Pokemon>> searchPokedexByName(
+      {required int limit, required int offset, required String query}) async {
+    Response response =
+        await dio.get("/search?limit=$limit&offset=$offset&query=$query");
+    if (response.statusCode == 200 && response.data != null) {
+      return response.data is List
+          ? (response.data as List<dynamic>)
+              .map((element) => PokemonInfra.fromJson(element))
+              .map<Pokemon>((element) => (
+                    id: element.id,
+                    idLabel: element.idLabel,
+                    name: element.name,
+                    imageUrl: element.imageUrl
+                  ))
+              .toList(growable: false)
+          : [];
+    } else {
+      throw Exception("erreur lors de la récupération du pokedex");
+    }
+  }
+
+  @override
   Future<CompletePokemon> findPokemonById({required int id}) async {
     // appel au back pour recup un pokemon par son id
     Response response = await dio.get("/pokemon/$id");
@@ -124,7 +146,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<List<ItemDetails>> findItemDetailsByPage({required int limit, required int offset}) async {
+  Future<List<ItemDetails>> findItemDetailsByPage(
+      {required int limit, required int offset}) async {
     // appel au back pour récup la liste des ItemDetails avec pagination
     Response response = await dio.get("/items?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
@@ -159,10 +182,13 @@ class PokemonRepositoryImpl implements PokemonRepository {
                     name: element.name,
                     power: element.power,
                     pp: element.pp,
-                    pokemonTypes: pokemonMapper.pokemonTypesInfraToPokemonTypes(element.pokemonTypes),
+                    pokemonTypes: pokemonMapper
+                        .pokemonTypesInfraToPokemonTypes(element.pokemonTypes),
                     flavorText: element.flavorText,
                     pokemons: element.pokemons
-                        .map((element) => pokemonMapper.pokemonInfraToPokemon(element)).toList(growable: false)
+                        .map((element) =>
+                            pokemonMapper.pokemonInfraToPokemon(element))
+                        .toList(growable: false)
                   ))
               .toList(growable: false)
           : [];

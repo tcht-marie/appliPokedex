@@ -9,6 +9,8 @@ abstract class PokemonService {
 
   Future<List<Pokemon>> getPokemonsByPage({required int limit, required int offset});
 
+  Future<List<Pokemon>> getPokedexByName({required int limit, required int offset, required String query});
+
   Future<List<Version>> getVersions();
 
   Future<List<ItemDetails>> getItemDetailsByPage({required int limit, required int offset});

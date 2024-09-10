@@ -33,7 +33,7 @@ class Features extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30),
+                padding: const EdgeInsets.only(top: 25),
                 child:
                     Text(style: Theme.of(context).textTheme.labelSmall, label),
               ),

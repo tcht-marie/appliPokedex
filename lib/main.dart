@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
       //home: Versions(pokemonService: pokemonService),
       //home: Items(pokemonService: pokemonService),
       //home: Moves(pokemonService: pokemonService),
-      //home: Pokedex(pokemonService: pokemonService),
-      home: PokemonComplete(pokemonService: pokemonService, pokemonId: 133),
+      home: Pokedex(pokemonService: pokemonService),
+      //home: PokemonComplete(pokemonService: pokemonService, pokemonId: 1),
     );
   }
 }

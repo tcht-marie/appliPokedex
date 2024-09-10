@@ -21,6 +21,11 @@ class PokemonServiceImpl implements PokemonService {
   Future<List<Pokemon>> getPokemonsByPage({required int limit, required int offset}) {
     return pokemonRepository.findPokemonsByPage(limit: limit, offset: offset);
   }
+
+  @override
+  Future<List<Pokemon>> getPokedexByName({required int limit, required int offset, required String query}) {
+    return pokemonRepository.searchPokedexByName(limit: limit, offset: offset, query: query);
+  }
   
   @override
   Future<List<Version>> getVersions() {

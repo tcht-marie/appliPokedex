@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/components/search_pokemon.dart';
 import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/pokemon.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
@@ -110,9 +110,14 @@ class _PokedexState extends State<Pokedex> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
         title: Text(
           "Pokedex",
           style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        bottom: const PreferredSize(
+          preferredSize: Size(10, 10),
+          child: SearchPokemon(),
         ),
       ),
       body: _isFirstLoadRunning

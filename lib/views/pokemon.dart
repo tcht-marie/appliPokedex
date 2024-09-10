@@ -95,16 +95,19 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                               ),
                             ],
                           ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: PokedexColors.colorTypes(
-                                      pokemon.pokemonTypes.first),
-                                ),
-                            "About",
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    color: PokedexColors.colorTypes(
+                                        pokemon.pokemonTypes.first),
+                                  ),
+                              "About",
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -147,16 +150,19 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                                     height: 1.5,
                                   ),
                               pokemon.flavorText),
-                          Text(
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                    color: PokedexColors.colorTypes(
-                                        pokemon.pokemonTypes.first),
-                                  ),
-                              "Base Stats"),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Text(
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      color: PokedexColors.colorTypes(
+                                          pokemon.pokemonTypes.first),
+                                    ),
+                                "Base Stats"),
+                          ),
                           StatPokemon(
                               pokemonStats: pokemon.pokemonStat,
                               types: pokemon.pokemonTypes.first),
