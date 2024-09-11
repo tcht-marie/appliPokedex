@@ -11,15 +11,19 @@ import '../../models/pokemon_types_infra.dart';
 import '../../models/stat_name_infra.dart';
 
 class PokemonMapper {
+  // transforme EvolutionChainInfra en EvolutionChain
   EvolutionChain evoChainInfraToEvoChain(EvolutionChainInfra evoChainInfra) {
     return (evolvesTo: evolvesToInfraToEvolvesTo(evoChainInfra.evolvesTo));
   }
 
+  // transforme EvolvesToInfra en EvolvesTo
   EvolvesTo evolvesToInfraToEvolvesTo(EvolvesToInfra evolvesToInfra) {
     return EvolvesTo(
+        // conversion récursive des évo en rappelant la même méthode
         evolvesToInfra.evolvesTo
             .map((element) => evolvesToInfraToEvolvesTo(element))
             .toList(growable: false),
+        // transformation du pokémon
         (
           id: evolvesToInfra.pokemon.id,
           idLabel: evolvesToInfra.pokemon.idLabel,
@@ -28,7 +32,9 @@ class PokemonMapper {
         ));
   }
 
+  // transformation StatNameInfra en StatName
   StatName statNameInfraToStatName(StatNameInfra statNameInfra) {
+    // utilisation d'un switch pour mapper chaque valeur d'une enum à l'autre
     return switch (statNameInfra) {
       StatNameInfra.hp => StatName.hp,
       StatNameInfra.atk => StatName.atk,
@@ -41,8 +47,10 @@ class PokemonMapper {
     };
   }
 
+  // transformation pokemonTypesInfra en PokemonTypes
   PokemonTypes pokemonTypesInfraToPokemonTypes(
       PokemonTypesInfra pokemonTypesInfra) {
+    // utilisation d'un switch pour mapper chaque valeur d'une enum à l'autre
     return switch (pokemonTypesInfra) {
       PokemonTypesInfra.normal => PokemonTypes.normal,
       PokemonTypesInfra.fighting => PokemonTypes.fighting,
@@ -67,6 +75,7 @@ class PokemonMapper {
     };
   }
 
+  // transformation PokemonInfra en Pokemon
   Pokemon pokemonInfraToPokemon(PokemonInfra pokemonInfra) {
     return (
       id: pokemonInfra.id,

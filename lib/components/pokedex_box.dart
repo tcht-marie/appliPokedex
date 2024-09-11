@@ -27,14 +27,14 @@ class PokedexBox extends StatelessWidget {
         color: PokedexColors.grayScale[100],
         borderRadius: BorderRadius.circular(8),
       ),
+      // Stack = pour superposer les widgets
       child: Stack(
         children: [
           Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 8.0),
-                child:
-                Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
@@ -47,6 +47,7 @@ class PokedexBox extends StatelessWidget {
               ),
             ],
           ),
+          // place le container du nom du pokemon en bas
           Positioned(
             bottom: 0,
             left: 0,
@@ -69,6 +70,7 @@ class PokedexBox extends StatelessWidget {
               ),
             ),
           ),
+          // place l'image du pokemon au centre et un peu en haut
           Positioned(
             top: 20,
             left: 0,

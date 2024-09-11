@@ -56,11 +56,12 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<List<Pokemon>> findPokemonsByPage(
       {required int limit, required int offset}) async {
+    //appel à la méthode factorisée popur récup pokemon avec pagination
     return _pokemonInfraToPokemon("",
         queryParameters: {"limit": limit, "offset": offset});
   }
 
-  //factorisation pour les deux override : findPokemonsByPage & searchPokedexByName
+  // méthode factorisée pour les deux méthodes : findPokemonsByPage & searchPokedexByName
   Future<List<Pokemon>> _pokemonInfraToPokemon(String endPoint,
       {Map<String, dynamic>? queryParameters}) async {
     Response response =
@@ -93,6 +94,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<List<Pokemon>> searchPokedexByName(
       {required int limit, required int offset, required String query}) async {
+    // appel à la méthode factorisée pour rechercher pokemon par name
     return _pokemonInfraToPokemon("/search",
         queryParameters: {"limit": limit, "offset": offset, "query": query});
   }
@@ -174,8 +176,10 @@ class PokemonRepositoryImpl implements PokemonRepository {
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)
+              // transformation de chaque élément JSON en ItemDetailsInfra
               .map<ItemDetailsInfra>(
                   (element) => ItemDetailsInfra.fromJson(element))
+              // transformation de chaque ItemDetailsInfra en ItemDetails
               .map<ItemDetails>((element) => (
                     spriteUrl: element.spriteUrl,
                     name: element.name,
@@ -197,15 +201,19 @@ class PokemonRepositoryImpl implements PokemonRepository {
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)
+              // transformation de chaque élément JSON en MoveDetailsInfra
               .map<MoveDetailsInfra>(
                   (element) => MoveDetailsInfra.fromJson(element))
+              // transformation de chaque MoveDetailsInfra en MoveDetails
               .map<MoveDetails>((element) => (
                     name: element.name,
                     power: element.power,
                     pp: element.pp,
+                    // appel à une méthode du mapper pour faire correspondre les deux enums (Infra vers domain)
                     pokemonTypes: pokemonMapper
                         .pokemonTypesInfraToPokemonTypes(element.pokemonTypes),
                     flavorText: element.flavorText,
+                    // list de pokemon = appel à la méthode de transformation de PokemonInfra en Pokemon mise dans le mapper pour factorisation du code
                     pokemons: element.pokemons
                         .map((element) =>
                             pokemonMapper.pokemonInfraToPokemon(element))

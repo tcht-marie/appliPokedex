@@ -4,17 +4,22 @@ import 'package:poke/domain/models/evolves_to.dart';
 import 'package:poke/domain/models/pokemon.dart';
 
 class EvoSpecies extends StatelessWidget {
+  // propriété pour stocker les infos d'évo
   final EvolvesTo evolvesTo;
 
   const EvoSpecies({super.key, required this.evolvesTo});
 
+  // fonction récursive pour créer l'evo chain
   List<Pokemon> chain(List<Pokemon> pokemons, EvolvesTo evo) {
+    // ajoute le pokemon actuel à la liste
     pokemons.add(evo.pokemon);
+    // parcourt les evo et les ajoute à la liste
     for (var element in evo.evolvesTo) {
       chain(pokemons, element);
     }
     return pokemons;
   }
+
   /*List<Pokemon> chain(List<Pokemon> pokemons, EvolvesTo evo) {
     pokemons.add(evolvesTo.pokemon);
     evolvesTo.evolvesTo

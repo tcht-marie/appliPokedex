@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:poke/components/evo_chip.dart';
 import 'package:poke/components/features.dart';
@@ -25,12 +24,15 @@ class _PokemonCompleteState extends State<PokemonComplete> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<CompletePokemon>(
+      // appel au service pour récup data d'un pokemon
       future: widget.pokemonService.getPokemonById(id: widget.pokemonId),
       builder: (BuildContext context, AsyncSnapshot<CompletePokemon> snapshot) {
+        // affichage d'un indicateur de chargement pendant la récup des datas
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error loading Pokémon data'));
+          // affichage pokemon si data
         } else if (snapshot.hasData) {
           final pokemon = snapshot.data!;
 
@@ -62,6 +64,7 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                 color: PokedexColors.colorTypes(pokemon.pokemonTypes.first),
                 child: Stack(
                   children: [
+                    // pour le fond blanc derrière les autres éléments
                     Positioned(
                         bottom: 0,
                         left: 0,
@@ -81,15 +84,15 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Expanded(
-                              flex: 0,
-                              /*child: GestureDetector(
+                            flex: 0,
+                            /*child: GestureDetector(
                                 onTap: () async {
                                   //print(pokemon.cries);
                                   await AudioPlayer().play(UrlSource(pokemon.cries, mimeType: 'audio/ogg'));
                                 },*/
-                                child: Image.network(
-                                    width: 230, height: 230, pokemon.imageUrl),
-                              //)
+                            child: Image.network(
+                                width: 230, height: 230, pokemon.imageUrl),
+                            //)
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -199,6 +202,7 @@ class _PokemonCompleteState extends State<PokemonComplete> {
               ],
             ),
           );
+          // si aucune datas trouvées, affiche juste une appbar et un text
         } else {
           return Scaffold(
             appBar: AppBar(

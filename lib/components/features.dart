@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class Features extends StatelessWidget {
   final List<String> features;
+
+  // icondata peut être null
   final IconData? iconData;
   final String label;
 
@@ -10,6 +12,7 @@ class Features extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // s'il y a une icon = affiche column
     return iconData != null
         ? Column(
             children: [
@@ -21,6 +24,7 @@ class Features extends StatelessWidget {
                     child: Icon(size: 19, iconData),
                   ),
                   Wrap(
+                    // .map pour parcourir l'ensemble des features
                     children: features
                         .map((feature) => Text(
                             style:
@@ -39,6 +43,7 @@ class Features extends StatelessWidget {
               ),
             ],
           )
+        // si pas d'icon, affiche autrement
         : Column(
             children: [
               //TODO : problème affichage avec un ou plusieurs moves

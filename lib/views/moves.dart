@@ -26,14 +26,18 @@ class _MovesState extends State<Moves> {
 
   List<MoveDetails> _moves = [];
 
+  // fonction premier  chargement
   void _firstLoad() async {
     setState(() {
+      // chargement initial en appelant fonction _isFirstLoadRunning
       _isFirstLoadRunning = true;
     });
     try {
       final movePage =
+          // appel au pokemonService
           await widget.pokemonService.getMoveDetailsByPage(_limit, _offset);
       setState(() {
+        // mise à jour de la liste
         _moves = movePage;
       });
     } catch (error) {
@@ -42,10 +46,12 @@ class _MovesState extends State<Moves> {
       }
     }
     setState(() {
+      // fin du chargement initial
       _isFirstLoadRunning = false;
     });
   }
 
+  // controller de scroll
   late ScrollController _controller;
 
   // fonction pour charger plus d'éléments lors du scroll
@@ -136,9 +142,11 @@ class _MovesState extends State<Moves> {
                               padding: const EdgeInsets.only(left: 20),
                               child: Text(
                                   textAlign: TextAlign.left,
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
                                   move.name),
                             ),
+                            // fleche pour ouvrir la tuile à gauche (de base elle est à droite)
                             controlAffinity: ListTileControlAffinity.leading,
                             trailing: TypeChip(type: move.pokemonTypes),
                             children: <Widget>[

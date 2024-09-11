@@ -21,12 +21,14 @@ class _PokedexState extends State<Pokedex> {
   late int _offset = 0;
   String _query = '';
 
+  // pour gérer l'état de chargement
   bool _hasNextPage = true;
   bool _isFirstLoadRunning = false;
   bool _isLoadMoreRunning = false;
 
   List<Pokemon> _pokemons = [];
 
+  // fonction pour charger les pokemon au premier chargement
   void _firstLoad() async {
     setState(() {
       _isFirstLoadRunning = true;
@@ -47,8 +49,10 @@ class _PokedexState extends State<Pokedex> {
     });
   }
 
+  // controller pour le scroll
   late ScrollController _controller;
 
+  // fonction pour rechercher un pokemon par name
   void _searchPokemon(String input) async {
     final searchQuery = await widget.pokemonService
         .getPokedexByName(limit: _limit, offset: _offset, query: input);
@@ -59,7 +63,7 @@ class _PokedexState extends State<Pokedex> {
 
   // fonction pour charger plus d'éléments lors du scroll
   void _loadMore() async {
-    // s'il y a une page suivante &
+    // s'il y a une page suivante & si aucun autre chargement
     if (_hasNextPage &&
         _isFirstLoadRunning == false &&
         _isLoadMoreRunning == false &&
@@ -130,16 +134,20 @@ class _PokedexState extends State<Pokedex> {
         bottom: PreferredSize(
           preferredSize: const Size(10, 10),
           child: SearchPokemon(
+            // mettre à jour la recherche (ce que contient query)
             setQuery: (input) {
               setState(() {
                 _query = input;
               });
             },
+            // fonction pour rechercher un pokemon en fonction de ce qui est entré dans l'input
             search: (input) => _searchPokemon(input),
+            // fonction pour effacer la recherche
             clearQuery: () {
               setState(() {
                 _query = '';
               });
+              // et recharge le pokedex initial
               _firstLoad();
             },
           ),

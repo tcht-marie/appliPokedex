@@ -20,10 +20,7 @@ class VersionBox extends StatelessWidget {
             )),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Text(
-              name,
-              style: Theme.of(context).textTheme.titleMedium
-          ),
+          child: Text(name, style: Theme.of(context).textTheme.titleMedium),
         ),
       ),
       Expanded(

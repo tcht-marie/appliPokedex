@@ -16,6 +16,7 @@ class StatPokemon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      // parcout chaque stats et crée une ligne pour chaque stats
       children: pokemonStats
           .map((element) => Row(
                 children: [
@@ -31,6 +32,7 @@ class StatPokemon extends StatelessWidget {
                           element.statName.value),
                     ),
                   ),
+                  // séparateur vertical entre name et value
                   Container(
                     width: 1.5,
                     height: 20,
