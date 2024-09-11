@@ -5,6 +5,7 @@ import 'package:poke/components/type_chip.dart';
 import 'package:poke/config/colors.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
+import '../components/poke_nav_bar.dart';
 import '../domain/models/move_details.dart';
 
 class Moves extends StatefulWidget {
@@ -115,55 +116,55 @@ class _MovesState extends State<Moves> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Moves",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
+      appBar: AppBar(
+        title: Text(
+          "Moves",
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        body: _isFirstLoadRunning
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(children: [
-                Expanded(
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        // controller
-                        controller: _controller,
-                        // nombre d'éléments dans la liste
-                        itemCount: _moves.length,
-                        itemBuilder: (BuildContext context, index) {
-                          final move = _moves[index];
-                          return ExpansionTile(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            title: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                  textAlign: TextAlign.left,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                  move.name),
-                            ),
-                            // fleche pour ouvrir la tuile à gauche (de base elle est à droite)
-                            controlAffinity: ListTileControlAffinity.leading,
-                            trailing: TypeChip(type: move.pokemonTypes),
-                            children: <Widget>[
-                              ListItem(
-                                  item: 'Power : ${move.power.toString()}'),
-                              ListItem(item: 'PP : ${move.pp.toString()}'),
-                              ListItem(item: move.flavorText),
-                            ],
-                          );
-                        })),
-                if (_isLoadMoreRunning)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 40),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-              ]));
+      ),
+      body: _isFirstLoadRunning
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(children: [
+              Expanded(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      // controller
+                      controller: _controller,
+                      // nombre d'éléments dans la liste
+                      itemCount: _moves.length,
+                      itemBuilder: (BuildContext context, index) {
+                        final move = _moves[index];
+                        return ExpansionTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          title: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.titleMedium,
+                                move.name),
+                          ),
+                          // fleche pour ouvrir la tuile à gauche (de base elle est à droite)
+                          controlAffinity: ListTileControlAffinity.leading,
+                          trailing: TypeChip(type: move.pokemonTypes),
+                          children: <Widget>[
+                            ListItem(item: 'Power : ${move.power.toString()}'),
+                            ListItem(item: 'PP : ${move.pp.toString()}'),
+                            ListItem(item: move.flavorText),
+                          ],
+                        );
+                      })),
+              if (_isLoadMoreRunning)
+                const Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 40),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+            ]),
+      bottomNavigationBar: const PokeNavBar(index: 3),
+    );
   }
 }

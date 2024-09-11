@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/pokemon_types.dart';
@@ -16,14 +14,10 @@ class PokemonHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const Icon(Icons.arrow_back),
-        Text(
-            style: Theme.of(context).textTheme.headlineSmall,
-            name),
+        Text(style: Theme.of(context).textTheme.headlineSmall, name),
         Padding(
-            padding: const EdgeInsets.only(left: 150),
-          child: Text(
-              style: Theme.of(context).textTheme.titleMedium,
-              idLabel),
+          padding: const EdgeInsets.only(left: 150),
+          child: Text(style: Theme.of(context).textTheme.titleMedium, idLabel),
         )
       ],
     );

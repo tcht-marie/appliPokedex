@@ -4,6 +4,8 @@ import 'package:poke/components/list_item.dart';
 import 'package:poke/domain/models/item_details.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
+import '../components/poke_nav_bar.dart';
+
 class Items extends StatefulWidget {
   final PokemonService pokemonService;
 
@@ -158,6 +160,8 @@ class _ItemsState extends State<Items> {
                       child: CircularProgressIndicator(),
                     ),
                   )
-              ]));
+              ]),
+      bottomNavigationBar: const PokeNavBar(index: 1),
+    );
   }
 }

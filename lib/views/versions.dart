@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poke/components/version_box.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
+import '../components/poke_nav_bar.dart';
 import '../domain/models/version.dart';
 
 class Versions extends StatelessWidget {
@@ -39,6 +40,7 @@ class Versions extends StatelessWidget {
               } else {
                 return const CircularProgressIndicator();
               }
-            }));
+            }),
+        bottomNavigationBar: const PokeNavBar(index: 2));
   }
 }

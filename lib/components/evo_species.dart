@@ -36,6 +36,7 @@ class EvoSpecies extends StatelessWidget {
           const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       children: chain([], evolvesTo)
           .map((element) => PokedexBox(
+              id: element.id,
               idLabel: element.idLabel,
               name: element.name,
               imageUrl: element.imageUrl))

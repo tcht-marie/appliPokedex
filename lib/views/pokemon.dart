@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poke/components/evo_chip.dart';
 import 'package:poke/components/features.dart';
+import 'package:poke/components/poke_nav_bar.dart';
 import 'package:poke/components/type_chip.dart';
 import 'package:poke/config/colors.dart';
+import 'package:poke/config/router.dart';
 import 'package:poke/domain/models/complete_pokemon.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:poke/views/pokedex.dart';
 
 import '../components/stat_pokemon.dart';
 
 class PokemonComplete extends StatefulWidget {
   final PokemonService pokemonService;
-  final int pokemonId;
+  final String pokemonId;
 
   const PokemonComplete(
       {super.key, required this.pokemonService, required this.pokemonId});
@@ -25,7 +29,8 @@ class _PokemonCompleteState extends State<PokemonComplete> {
   Widget build(BuildContext context) {
     return FutureBuilder<CompletePokemon>(
       // appel au service pour récup data d'un pokemon
-      future: widget.pokemonService.getPokemonById(id: widget.pokemonId),
+      future:
+          widget.pokemonService.getPokemonById(id: int.parse(widget.pokemonId)),
       builder: (BuildContext context, AsyncSnapshot<CompletePokemon> snapshot) {
         // affichage d'un indicateur de chargement pendant la récup des datas
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -44,10 +49,13 @@ class _PokemonCompleteState extends State<PokemonComplete> {
               title: Text(
                   style: Theme.of(context).textTheme.headlineSmall,
                   pokemon.name),
-              leading: Icon(
-                  color: PokedexColors.grayScale[100],
-                  size: 30,
-                  Icons.arrow_back),
+              leading: IconButton(
+                icon: Icon(
+                    color: PokedexColors.grayScale[100],
+                    size: 30,
+                    Icons.arrow_back),
+                onPressed: () => context.pop(),
+              ),
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
@@ -83,16 +91,41 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Expanded(
-                            flex: 0,
-                            /*child: GestureDetector(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              pokemon.id == 1
+                                  ? const Icon(
+                                      color: Colors.transparent,
+                                      Icons.arrow_back_ios_new_outlined)
+                                  : IconButton(
+                                      onPressed: () => context
+                                          .push('/pokemon/${pokemon.id - 1}'),
+                                      icon: Icon(
+                                          color: PokedexColors.grayScale[100],
+                                          Icons.arrow_back_ios_new_outlined)),
+                              Expanded(
+                                flex: 0,
+                                /*child: GestureDetector(
                                 onTap: () async {
                                   //print(pokemon.cries);
                                   await AudioPlayer().play(UrlSource(pokemon.cries, mimeType: 'audio/ogg'));
                                 },*/
-                            child: Image.network(
-                                width: 230, height: 230, pokemon.imageUrl),
-                            //)
+                                child: Image.network(
+                                    width: 230, height: 230, pokemon.imageUrl),
+                                //)
+                              ),
+                              pokemon.id == 1025
+                                  ? const Icon(
+                                      color: Colors.transparent,
+                                      Icons.arrow_back_ios_new_outlined)
+                                  : IconButton(
+                                      onPressed: () => context
+                                          .push('/pokemon/${pokemon.id + 1}'),
+                                      icon: Icon(
+                                          color: PokedexColors.grayScale[100],
+                                          Icons.arrow_forward_ios_outlined)),
+                            ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -182,25 +215,7 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                     ),
                   ],
                 )),
-            // TODO : si nav bar, changer hauteur background white
-            bottomNavigationBar: NavigationBar(
-              backgroundColor:
-                  PokedexColors.colorTypes(pokemon.pokemonTypes.first),
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Icons.home_outlined),
-                  label: 'Home',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.my_library_books_outlined),
-                  label: 'Pokedex',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.list_outlined),
-                  label: 'Versions',
-                ),
-              ],
-            ),
+            bottomNavigationBar: const PokeNavBar(index: 0),
           );
           // si aucune datas trouvées, affiche juste une appbar et un text
         } else {

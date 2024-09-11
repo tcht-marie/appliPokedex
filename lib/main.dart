@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:poke/config/router.dart';
 import 'package:poke/config/theme.dart';
 import 'package:poke/domain/repositories/pokemon_repository.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
@@ -27,13 +29,14 @@ class MyApp extends StatelessWidget {
         PokemonRepositoryImpl(pokemonMapper);
     final PokemonService pokemonService = PokemonServiceImpl(pokemonRepository);
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
+      routerConfig: GoRouterConfig.router(pokemonService),
       //home: Versions(pokemonService: pokemonService),
       //home: Items(pokemonService: pokemonService),
       //home: Moves(pokemonService: pokemonService),
-      home: Pokedex(pokemonService: pokemonService),
+      //home: Pokedex(pokemonService: pokemonService),
       //home: PokemonComplete(pokemonService: pokemonService, pokemonId: 1),
       //home: RegisterUser(),
     );
@@ -41,23 +44,6 @@ class MyApp extends StatelessWidget {
 }
 
 /*
-  GoRouter router = GoRouter (
-    routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => HomeScreen()
-      ),
-      GoRoute(
-        path: '/versions',
-        builder: (context, state) => Versions(pokemonService: pokemonService)
-      ),
-      GoRoute(
-        path: '/items',
-        builder: (context, state) => ItemDetails(pokemonService: pokemonService)
-      )
-    ],
-  );
-
   MaterialApp.router(
     routerConfig: router
   )

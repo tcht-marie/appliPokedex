@@ -5,6 +5,7 @@ import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/pokemon.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
+import '../components/poke_nav_bar.dart';
 import '../components/pokedex_box.dart';
 
 class Pokedex extends StatefulWidget {
@@ -161,7 +162,7 @@ class _PokedexState extends State<Pokedex> {
               color: PokedexColors.grayScale[100],
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
+                    const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
                     Expanded(
@@ -174,6 +175,7 @@ class _PokedexState extends State<Pokedex> {
                         itemBuilder: (BuildContext context, index) {
                           final pokedex = _pokemons[index];
                           return PokedexBox(
+                              id: pokedex.id,
                               name: pokedex.name,
                               idLabel: pokedex.idLabel,
                               imageUrl: pokedex.imageUrl);
@@ -191,6 +193,7 @@ class _PokedexState extends State<Pokedex> {
                 ),
               ),
             ),
+      bottomNavigationBar: const PokeNavBar(index: 0),
     );
   }
 }
