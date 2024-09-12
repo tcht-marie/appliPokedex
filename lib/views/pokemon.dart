@@ -67,135 +67,82 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                 ),
               ],
             ),
-            body: Container(
-                //color: Colors.white,
-                color: PokedexColors.colorTypes(pokemon.pokemonTypes.first),
-                child: Stack(
-                  children: [
-                    // pour le fond blanc derrière les autres éléments
-                    Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: 530,
-                        child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            decoration: BoxDecoration(
-                              color: PokedexColors.grayScale[100],
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(15)),
-                            ))),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              pokemon.id == 1
-                                  ? const Icon(
-                                      color: Colors.transparent,
-                                      Icons.arrow_back_ios_new_outlined)
-                                  : IconButton(
-                                      onPressed: () => context
-                                          .push('/pokemon/${pokemon.id - 1}'),
-                                      icon: Icon(
-                                          color: PokedexColors.grayScale[100],
-                                          Icons.arrow_back_ios_new_outlined)),
-                              Expanded(
-                                flex: 0,
-                                /*child: GestureDetector(
+            body: /*SingleChildScrollView(
+              child:*/ Container(
+                  color: PokedexColors.colorTypes(pokemon.pokemonTypes.first),
+                  child: Stack(
+                    children: [
+                      // pour le fond blanc derrière les autres éléments
+                      Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          height: 530,
+                          child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              decoration: BoxDecoration(
+                                color: PokedexColors.grayScale[100],
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                              ))),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                pokemon.id == 1
+                                    ? const Icon(
+                                        color: Colors.transparent,
+                                        Icons.arrow_back_ios_new_outlined)
+                                    : IconButton(
+                                        onPressed: () => context
+                                            .push('/pokemon/${pokemon.id - 1}'),
+                                        icon: Icon(
+                                            color: PokedexColors.grayScale[100],
+                                            Icons.arrow_back_ios_new_outlined)),
+                                Expanded(
+                                  flex: 0,
+                                  /*child: GestureDetector(
                                 onTap: () async {
                                   //print(pokemon.cries);
                                   await AudioPlayer().play(UrlSource(pokemon.cries, mimeType: 'audio/ogg'));
                                 },*/
-                                child: Image.network(
-                                    width: 230, height: 230, pokemon.imageUrl),
-                                //)
-                              ),
-                              pokemon.id == 1025
-                                  ? const Icon(
-                                      color: Colors.transparent,
-                                      Icons.arrow_back_ios_new_outlined)
-                                  : IconButton(
-                                      onPressed: () => context
-                                          .push('/pokemon/${pokemon.id + 1}'),
-                                      icon: Icon(
-                                          color: PokedexColors.grayScale[100],
-                                          Icons.arrow_forward_ios_outlined)),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Wrap(
-                                spacing: 20,
-                                children: pokemon.pokemonTypes
-                                    .map((type) => TypeChip(type: type))
-                                    .toList(growable: false),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                    color: PokedexColors.colorTypes(
-                                        pokemon.pokemonTypes.first),
-                                  ),
-                              "About",
+                                  child: Image.network(
+                                      width: 230,
+                                      height: 230,
+                                      pokemon.imageUrl),
+                                  //)
+                                ),
+                                pokemon.id == 1025
+                                    ? const Icon(
+                                        color: Colors.transparent,
+                                        Icons.arrow_back_ios_new_outlined)
+                                    : IconButton(
+                                        onPressed: () => context
+                                            .push('/pokemon/${pokemon.id + 1}'),
+                                        icon: Icon(
+                                            color: PokedexColors.grayScale[100],
+                                            Icons.arrow_forward_ios_outlined)),
+                              ],
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Expanded(
-                                child: Features(
-                                    iconData: Icons.scale_outlined,
-                                    features: ['${pokemon.weight} kg'],
-                                    label: "Weight"),
-                              ),
-                              Container(
-                                width: 1.5,
-                                height: 70,
-                                color: PokedexColors.grayScale[050],
-                              ),
-                              Expanded(
-                                child: Features(
-                                    iconData: Icons.height_outlined,
-                                    features: ['${pokemon.height} m'],
-                                    label: "Height"),
-                              ),
-                              Container(
-                                width: 1.5,
-                                height: 70,
-                                color: PokedexColors.grayScale[050],
-                              ),
-                              Expanded(
-                                child: Features(
-                                    features: pokemon.abilities,
-                                    label: "Moves"),
-                              ),
-                            ],
-                          ),
-                          Text(
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    height: 1.5,
-                                  ),
-                              pokemon.flavorText),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Text(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Wrap(
+                                  spacing: 20,
+                                  children: pokemon.pokemonTypes
+                                      .map((type) => TypeChip(type: type))
+                                      .toList(growable: false),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Text(
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -204,17 +151,75 @@ class _PokemonCompleteState extends State<PokemonComplete> {
                                       color: PokedexColors.colorTypes(
                                           pokemon.pokemonTypes.first),
                                     ),
-                                "Base Stats"),
-                          ),
-                          StatPokemon(
-                              pokemonStats: pokemon.pokemonStat,
-                              types: pokemon.pokemonTypes.first),
-                          EvoChip(pokemon: pokemon),
-                        ],
+                                "About",
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Features(
+                                      iconData: Icons.scale_outlined,
+                                      features: ['${pokemon.weight} kg'],
+                                      label: "Weight"),
+                                ),
+                                Container(
+                                  width: 1.5,
+                                  height: 70,
+                                  color: PokedexColors.grayScale[050],
+                                ),
+                                Expanded(
+                                  child: Features(
+                                      iconData: Icons.height_outlined,
+                                      features: ['${pokemon.height} m'],
+                                      label: "Height"),
+                                ),
+                                Container(
+                                  width: 1.5,
+                                  height: 70,
+                                  color: PokedexColors.grayScale[050],
+                                ),
+                                Expanded(
+                                  child: Features(
+                                      features: pokemon.abilities,
+                                      label: "Moves"),
+                                ),
+                              ],
+                            ),
+                            Text(
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      height: 1.5,
+                                    ),
+                                pokemon.flavorText),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Text(
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: PokedexColors.colorTypes(
+                                            pokemon.pokemonTypes.first),
+                                      ),
+                                  "Base Stats"),
+                            ),
+                            StatPokemon(
+                                pokemonStats: pokemon.pokemonStat,
+                                types: pokemon.pokemonTypes.first),
+                            EvoChip(pokemon: pokemon),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  )),
+            //),
             bottomNavigationBar: const PokeNavBar(index: 0),
           );
           // si aucune datas trouvées, affiche juste une appbar et un text

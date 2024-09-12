@@ -35,11 +35,18 @@ class _PokedexState extends State<Pokedex> {
       _isFirstLoadRunning = true;
     });
     try {
+      _offset = 0;
+      _hasNextPage = true;
       final pokedexPage = await widget.pokemonService
           .getPokemonsByPage(limit: _limit, offset: _offset);
       setState(() {
         _pokemons = pokedexPage;
       });
+      if (pokedexPage.length < _limit) {
+        setState(() {
+          _hasNextPage = false;
+        });
+      }
     } catch (error) {
       if (kDebugMode) {
         print('Something went wrong');
@@ -55,8 +62,15 @@ class _PokedexState extends State<Pokedex> {
 
   // fonction pour rechercher un pokemon par name
   void _searchPokemon(String input) async {
+    _offset = 0;
+    _hasNextPage = true;
     final searchQuery = await widget.pokemonService
         .getPokedexByName(limit: _limit, offset: _offset, query: input);
+    if (searchQuery.length < _limit) {
+      setState(() {
+        _hasNextPage = false;
+      });
+    }
     setState(() {
       _pokemons = searchQuery;
     });
@@ -70,7 +84,7 @@ class _PokedexState extends State<Pokedex> {
         _isLoadMoreRunning == false &&
         // .position = donne accès à la position actuelle du scroll
         // .extentAfter = représente la distance entre la position actuelle et la fin du contenu défilable
-        // vérifié si user est proche de la fin de la zone scrollable (moins de 300 pixels)
+        // vérifie si user est proche de la fin de la zone scrollable (moins de 300 pixels)
         _controller.position.extentAfter < 300) {
       setState(() {
         // début du chargement supplémentaire
