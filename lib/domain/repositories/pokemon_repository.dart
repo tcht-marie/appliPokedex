@@ -17,4 +17,12 @@ abstract class PokemonRepository {
   Future<List<ItemDetails>> findItemDetailsByPage({required int limit, required int offset});
   
   Future<List<MoveDetails>> findMoveDetailsByPage(int limit, int offset);
+
+  Future<List<Pokemon>> findTrainerPokedex();
+
+  Future<Pokemon> addPokemonToPokedex({required int id});
+
+  Future<Pokemon> deletePokemon({required int id});
+
+  Future<void> deleteAllPokemons();
 }

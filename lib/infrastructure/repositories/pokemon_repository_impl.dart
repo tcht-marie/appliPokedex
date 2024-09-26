@@ -14,10 +14,13 @@ import 'package:poke/infrastructure/models/move_details_infra.dart';
 import 'package:poke/infrastructure/models/pokemon_infra.dart';
 import 'package:poke/infrastructure/models/version_infra.dart';
 import 'mapper/pokemon_mapper.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
   // initialisation de Dio avec l'url de base
-  final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080/pokemons'));
+  final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080/pokemons'))
+    ..interceptors.add(CookieManager(CookieJar()));
 
   final PokemonMapper pokemonMapper;
 
@@ -224,5 +227,65 @@ class PokemonRepositoryImpl implements PokemonRepository {
     } else {
       throw Exception("erreur lors de la récupération des moves");
     }
+  }
+
+  @override
+  Future<List<Pokemon>> findTrainerPokedex() async {
+    Response response = await dio.get("/pokedex/me");
+    if (response.statusCode == 200 && response.data != null) {
+      return response.data is List
+          ? (response.data as List<dynamic>)
+              .map<PokemonInfra>((element) => PokemonInfra.fromJson(element))
+              .map<Pokemon>((element) => (
+                    id: element.id,
+                    idLabel: element.idLabel,
+                    name: element.name,
+                    imageUrl: element.imageUrl
+                  ))
+              .toList(growable: false)
+          : [];
+    } else {
+      throw Exception("erreur lors de la récupération du pokedex");
+    }
+  }
+
+  @override
+  Future<Pokemon> addPokemonToPokedex({required int id}) async {
+    Response response = await dio.post("/pokedex/$id/me");
+    if (response.statusCode == 200 && response.data != null) {
+      PokemonInfra pokemon = PokemonInfra.fromJson(response.data);
+      return (
+        id: pokemon.id,
+        idLabel: pokemon.idLabel,
+        name: pokemon.name,
+        imageUrl: pokemon.imageUrl
+      );
+    } else {
+      throw Exception("Erreur lors de l'ajout du pokémon");
+    }
+  }
+
+  @override
+  Future<Pokemon> deletePokemon({required int id}) async {
+    Response response = await dio.delete("/pokedex/$id/me");
+    if (response.statusCode == 200 && response.data != null) {
+      PokemonInfra pokemon = PokemonInfra.fromJson(response.data);
+      return (
+        id: pokemon.id,
+        idLabel: pokemon.idLabel,
+        name: pokemon.name,
+        imageUrl: pokemon.imageUrl
+      );
+    } else {
+      throw Exception("Erreur lors de la suppression du pokémon");
+    }
+  }
+
+  @override
+  Future<void> deleteAllPokemons() async {
+    Response response = await dio.delete("/pokedex/me");
+    response.statusCode == 200
+        ? null
+        : throw Exception("Erreur lors de la suppression du pokedex");
   }
 }

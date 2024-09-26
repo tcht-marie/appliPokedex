@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:poke/components/pokedex_box.dart';
 
 import '../config/colors.dart';
 
@@ -40,6 +39,11 @@ class PokeNavBar extends StatelessWidget {
               onPressed: () => context.go('/moves'),
               icon: const Icon(Icons.list_alt_outlined)),
           label: 'Moves',
+        ),NavigationDestination(
+          icon: IconButton(
+              onPressed: () => context.go('/register'),
+              icon: const Icon(Icons.app_registration_outlined)),
+          label: 'Register',
         ),
       ],
     );

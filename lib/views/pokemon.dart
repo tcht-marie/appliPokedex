@@ -5,11 +5,9 @@ import 'package:poke/components/features.dart';
 import 'package:poke/components/poke_nav_bar.dart';
 import 'package:poke/components/type_chip.dart';
 import 'package:poke/config/colors.dart';
-import 'package:poke/config/router.dart';
 import 'package:poke/domain/models/complete_pokemon.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:poke/views/pokedex.dart';
+// import 'package:audioplayers/audioplayers.dart';
 
 import '../components/stat_pokemon.dart';
 

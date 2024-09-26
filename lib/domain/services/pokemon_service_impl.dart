@@ -42,4 +42,23 @@ class PokemonServiceImpl implements PokemonService {
     return pokemonRepository.findMoveDetailsByPage(limit, offset);
   }
 
+  @override
+  Future<List<Pokemon>> getTrainerPokedex() {
+    return pokemonRepository.findTrainerPokedex();
+  }
+
+  @override
+  Future<Pokemon> addPokemonToPokedexTrainer(int id) {
+    return pokemonRepository.addPokemonToPokedex(id: id);
+  }
+
+  @override
+  Future<Pokemon> deletePokemonToPokedexTrainer(int id) {
+    return pokemonRepository.deletePokemon(id: id);
+  }
+
+  @override
+  Future<void> deleteAllPokemonsToPokedexTrainer() {
+    return pokemonRepository.deleteAllPokemons();
+  }
 }
