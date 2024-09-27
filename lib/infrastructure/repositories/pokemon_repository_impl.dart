@@ -14,18 +14,15 @@ import 'package:poke/infrastructure/models/move_details_infra.dart';
 import 'package:poke/infrastructure/models/pokemon_infra.dart';
 import 'package:poke/infrastructure/models/version_infra.dart';
 import 'mapper/pokemon_mapper.dart';
-import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
   // initialisation de Dio avec l'url de base
-  final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080/pokemons'))
-    ..interceptors.add(CookieManager(CookieJar()));
+  final Dio dio;
 
   final PokemonMapper pokemonMapper;
 
   // constructeur
-  PokemonRepositoryImpl(this.pokemonMapper);
+  PokemonRepositoryImpl(this.pokemonMapper, this.dio);
 
   /*@override
   Future<List<Pokemon>> findPokemonsByPage(
@@ -60,7 +57,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<List<Pokemon>> findPokemonsByPage(
       {required int limit, required int offset}) async {
     //appel à la méthode factorisée popur récup pokemon avec pagination
-    return _pokemonInfraToPokemon("",
+    return _pokemonInfraToPokemon("/pokemons",
         queryParameters: {"limit": limit, "offset": offset});
   }
 
@@ -98,14 +95,14 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<List<Pokemon>> searchPokedexByName(
       {required int limit, required int offset, required String query}) async {
     // appel à la méthode factorisée pour rechercher pokemon par name
-    return _pokemonInfraToPokemon("/search",
+    return _pokemonInfraToPokemon("/pokemons/search",
         queryParameters: {"limit": limit, "offset": offset, "query": query});
   }
 
   @override
   Future<CompletePokemon> findPokemonById({required int id}) async {
     // appel au back pour recup un pokemon par son id
-    Response response = await dio.get("/pokemon/$id");
+    Response response = await dio.get("/pokemons/pokemon/$id");
     if (response.statusCode == 200 && response.data != null) {
       // transformation des data jason en objet CompletePokemonInfra
       CompletePokemonInfra completePokemonInfra =
@@ -153,7 +150,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<List<Version>> findVersions() async {
     // appel au back pour récup les versions
-    Response response = await dio.get("/versions");
+    Response response = await dio.get("/pokemons/versions");
     if (response.statusCode == 200 && response.data != null) {
       // si les données sont une liste
       return response.data is List
@@ -175,7 +172,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<List<ItemDetails>> findItemDetailsByPage(
       {required int limit, required int offset}) async {
     // appel au back pour récup la liste des ItemDetails avec pagination
-    Response response = await dio.get("/items?limit=$limit&offset=$offset");
+    Response response = await dio.get("/pokemons/items?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)
@@ -200,7 +197,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<List<MoveDetails>> findMoveDetailsByPage(int limit, int offset) async {
     // appel au back pour récup une liste de MoveDetails avec pagination
-    Response response = await dio.get("/moves?limit=$limit&offset=$offset");
+    Response response = await dio.get("/pokemons/moves?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)
@@ -231,7 +228,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<List<Pokemon>> findTrainerPokedex() async {
-    Response response = await dio.get("/pokedex/me");
+    Response response = await dio.get("/pokemons/pokedex/me");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)
@@ -251,7 +248,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<Pokemon> addPokemonToPokedex({required int id}) async {
-    Response response = await dio.post("/pokedex/$id/me");
+    Response response = await dio.post("/pokemons/pokedex/$id/me");
     if (response.statusCode == 200 && response.data != null) {
       PokemonInfra pokemon = PokemonInfra.fromJson(response.data);
       return (
@@ -267,7 +264,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<Pokemon> deletePokemon({required int id}) async {
-    Response response = await dio.delete("/pokedex/$id/me");
+    Response response = await dio.delete("/pokemons/pokedex/$id/me");
     if (response.statusCode == 200 && response.data != null) {
       PokemonInfra pokemon = PokemonInfra.fromJson(response.data);
       return (
@@ -283,7 +280,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<void> deleteAllPokemons() async {
-    Response response = await dio.delete("/pokedex/me");
+    Response response = await dio.delete("/pokemons/pokedex/me");
     response.statusCode == 200
         ? null
         : throw Exception("Erreur lors de la suppression du pokedex");

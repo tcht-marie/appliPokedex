@@ -1,5 +1,6 @@
 
 import 'package:go_router/go_router.dart';
+import 'package:poke/domain/services/authentication_service.dart';
 import 'package:poke/views/items.dart';
 import 'package:poke/views/moves.dart';
 import 'package:poke/views/pokedex.dart';
@@ -10,34 +11,34 @@ import '../views/versions.dart';
 
 class GoRouterConfig {
 
-  static GoRouter router(pokemonService) {
+  static GoRouter router() {
+
     return GoRouter (
       initialLocation: '/',
       routes: [
         GoRoute(
             path: '/',
-            builder: (context, state) => Pokedex(pokemonService: pokemonService)
+            builder: (context, state) => const Pokedex()
         ),
         GoRoute(
             path: '/versions',
-            builder: (context, state) => Versions(pokemonService: pokemonService)
+            builder: (context, state) => const Versions()
         ),
         GoRoute(
             path: '/items',
-            builder: (context, state) => Items(pokemonService: pokemonService)
+            builder: (context, state) => const Items()
         ),
         GoRoute(
             path: '/moves',
-            builder: (context, state) => Moves(pokemonService: pokemonService)
+            builder: (context, state) => const Moves()
         ),
         GoRoute(
             path: '/pokemon/:id',
-            builder: (context, state) => PokemonComplete(pokemonService: pokemonService, pokemonId: state.pathParameters['id']!)
+            builder: (context, state) => PokemonComplete(pokemonId: state.pathParameters['id']!)
         ),
         GoRoute(
             path: '/register',
-          builder: (context, state) => const RegisterUser()
-        )
+            builder: (context, state) => const RegisterUser("Marie", "test"))
       ],
     );
   }

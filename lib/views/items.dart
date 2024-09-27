@@ -1,23 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/components/list_item.dart';
+import 'package:poke/config/providers.dart';
 import 'package:poke/domain/models/item_details.dart';
 import 'package:poke/domain/services/pokemon_service.dart';
 
 import '../components/poke_nav_bar.dart';
 
-class Items extends StatefulWidget {
-  final PokemonService pokemonService;
+class Items extends ConsumerStatefulWidget {
 
   // constructeur
-  const Items({super.key, required this.pokemonService});
+  const Items({super.key});
 
   @override
-  State<Items> createState() => _ItemsState();
+  ConsumerState<Items> createState() => _ItemsState();
 }
 
 // état associé au StatefulWidget Items
-class _ItemsState extends State<Items> {
+class _ItemsState extends ConsumerState<Items> {
   // limite du nombre d'éléments par page
   static const int _limit = 20;
 
@@ -44,7 +45,7 @@ class _ItemsState extends State<Items> {
     });
     try {
       // récupération des éléments en appelant le pokemonService
-      final itemPage = await widget.pokemonService
+      final itemPage = await ref.read(pokemonServiceProvider)
           .getItemDetailsByPage(limit: _limit, offset: _offset);
       setState(() {
         // mise à jour de la liste d'éléments
@@ -80,7 +81,7 @@ class _ItemsState extends State<Items> {
       _offset += _limit;
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
-        final itemPage = await widget.pokemonService
+        final itemPage = await ref.read(pokemonServiceProvider)
             .getItemDetailsByPage(limit: _limit, offset: _offset);
         setState(() {
           // ajout des nouveaux éléments en gardant aussi ceux d'avant

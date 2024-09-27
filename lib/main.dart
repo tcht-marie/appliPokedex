@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poke/config/router.dart';
 import 'package:poke/config/theme.dart';
@@ -24,24 +25,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final PokemonMapper pokemonMapper = PokemonMapper();
-    final PokemonRepository pokemonRepository =
-        PokemonRepositoryImpl(pokemonMapper);
-    final PokemonService pokemonService = PokemonServiceImpl(pokemonRepository);
 
-    return MaterialApp.router(
+    return ProviderScope(
+        child: MaterialApp.router(
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
-      routerConfig: GoRouterConfig.router(pokemonService),
-      //home: Versions(pokemonService: pokemonService),
-      //home: Items(pokemonService: pokemonService),
-      //home: Moves(pokemonService: pokemonService),
-      //home: Pokedex(pokemonService: pokemonService),
-      //home: PokemonComplete(pokemonService: pokemonService, pokemonId: 1),
-      //home: RegisterUser(),
-    );
+      routerConfig: GoRouterConfig.router(),
+    ));
   }
 }
+
+//home: Versions(pokemonService: pokemonService),
+//home: Items(pokemonService: pokemonService),
+//home: Moves(pokemonService: pokemonService),
+//home: Pokedex(pokemonService: pokemonService),
+//home: PokemonComplete(pokemonService: pokemonService, pokemonId: 1),
+//home: RegisterUser(),
 
 /*
   MaterialApp.router(
@@ -55,9 +54,6 @@ class MyApp extends StatelessWidget {
 OU  onPressed: () => context.go('/')
   )
 */
-
-
-
 
 /*class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

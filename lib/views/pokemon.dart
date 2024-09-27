@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poke/components/evo_chip.dart';
 import 'package:poke/components/features.dart';
@@ -10,25 +11,25 @@ import 'package:poke/domain/services/pokemon_service.dart';
 // import 'package:audioplayers/audioplayers.dart';
 
 import '../components/stat_pokemon.dart';
+import '../config/providers.dart';
 
-class PokemonComplete extends StatefulWidget {
-  final PokemonService pokemonService;
+class PokemonComplete extends ConsumerStatefulWidget {
   final String pokemonId;
 
   const PokemonComplete(
-      {super.key, required this.pokemonService, required this.pokemonId});
+      {super.key, required this.pokemonId});
 
   @override
-  State<PokemonComplete> createState() => _PokemonCompleteState();
+  ConsumerState<PokemonComplete> createState() => _PokemonCompleteState();
 }
 
-class _PokemonCompleteState extends State<PokemonComplete> {
+class _PokemonCompleteState extends ConsumerState<PokemonComplete> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<CompletePokemon>(
       // appel au service pour récup data d'un pokemon
       future:
-          widget.pokemonService.getPokemonById(id: int.parse(widget.pokemonId)),
+      ref.read(pokemonServiceProvider).getPokemonById(id: int.parse(widget.pokemonId)),
       builder: (BuildContext context, AsyncSnapshot<CompletePokemon> snapshot) {
         // affichage d'un indicateur de chargement pendant la récup des datas
         if (snapshot.connectionState == ConnectionState.waiting) {

@@ -1,23 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/components/search_pokemon.dart';
 import 'package:poke/config/colors.dart';
+import 'package:poke/config/providers.dart';
 import 'package:poke/domain/models/pokemon.dart';
-import 'package:poke/domain/services/pokemon_service.dart';
 
 import '../components/poke_nav_bar.dart';
 import '../components/pokedex_box.dart';
 
-class Pokedex extends StatefulWidget {
-  final PokemonService pokemonService;
+class Pokedex extends ConsumerStatefulWidget {
 
-  const Pokedex({super.key, required this.pokemonService});
+  const Pokedex({super.key});
 
   @override
-  State<Pokedex> createState() => _PokedexState();
+  ConsumerState<Pokedex> createState() => _PokedexState();
 }
 
-class _PokedexState extends State<Pokedex> {
+class _PokedexState extends ConsumerState<Pokedex> {
   static const int _limit = 20;
   late int _offset = 0;
   String _query = '';
@@ -37,7 +37,7 @@ class _PokedexState extends State<Pokedex> {
     try {
       _offset = 0;
       _hasNextPage = true;
-      final pokedexPage = await widget.pokemonService
+      final pokedexPage = await ref.read(pokemonServiceProvider)
           .getPokemonsByPage(limit: _limit, offset: _offset);
       setState(() {
         _pokemons = pokedexPage;
@@ -64,7 +64,7 @@ class _PokedexState extends State<Pokedex> {
   void _searchPokemon(String input) async {
     _offset = 0;
     _hasNextPage = true;
-    final searchQuery = await widget.pokemonService
+    final searchQuery = await ref.read(pokemonServiceProvider)
         .getPokedexByName(limit: _limit, offset: _offset, query: input);
     if (searchQuery.length < _limit) {
       setState(() {
@@ -95,9 +95,9 @@ class _PokedexState extends State<Pokedex> {
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
         final pokedexPage = _query.isEmpty
-            ? await widget.pokemonService
+            ? await ref.read(pokemonServiceProvider)
                 .getPokemonsByPage(limit: _limit, offset: _offset)
-            : await widget.pokemonService.getPokedexByName(
+            : await ref.read(pokemonServiceProvider).getPokedexByName(
                 limit: _limit, offset: _offset, query: _query);
         setState(() {
           // ajout des nouveaux éléments en gardant aussi ceux d'avant
