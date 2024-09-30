@@ -74,8 +74,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/assets/images/background.webp
-    - lib/assets/images/background.jpeg
+    - lib/assets/images/pokeball.jpg
+    - lib/assets/images/banniere_pokemon.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -23,18 +23,16 @@ class Home extends StatelessWidget {
         child: const Stack(
           fit: StackFit.expand,
           children: [
-            Positioned(
-              child: Opacity(
-                opacity: 0.7,
-                child: Image(
-                  alignment: Alignment.bottomCenter,
-                  /*fit: BoxFit.cover,*/
-                  image: AssetImage("lib/assets/images/background.jpeg"),
-                ),
+            Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: Image(
+                alignment: Alignment.topCenter,
+                /*fit: BoxFit.cover,*/
+                image: AssetImage("lib/assets/images/banniere_pokemon.jpg"),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 100),
+              padding: EdgeInsets.only(top: 150),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,6 +48,11 @@ class Home extends StatelessWidget {
                   HomeButton(name: "Register", path: '/register'),
                 ],
               ),
+            ),
+            Image(
+              alignment: Alignment.bottomCenter,
+              /*fit: BoxFit.cover,*/
+              image: AssetImage("lib/assets/images/pokeball.jpg"),
             ),
           ],
         ),
