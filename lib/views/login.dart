@@ -1,21 +1,21 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:poke/components/input_form.dart';
-import 'package:poke/config/colors.dart';
-import 'package:poke/config/providers.dart';
 
+import '../components/input_form.dart';
 import '../components/poke_nav_bar.dart';
+import '../config/colors.dart';
+import '../config/providers.dart';
 
-class RegisterUser extends ConsumerStatefulWidget {
-  const RegisterUser({super.key});
+class Login extends ConsumerStatefulWidget {
+  const Login({super.key});
 
   @override
-  ConsumerState<RegisterUser> createState() => _RegisterUserState();
+  ConsumerState<Login> createState() => _LoginState();
 }
 
-class _RegisterUserState extends ConsumerState<RegisterUser> {
+class _LoginState extends ConsumerState<Login> {
   String username = "";
   String password = "";
 
@@ -24,7 +24,7 @@ class _RegisterUserState extends ConsumerState<RegisterUser> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Register",
+          "Login",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -64,17 +64,14 @@ class _RegisterUserState extends ConsumerState<RegisterUser> {
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   side: const BorderSide(width: 0),
                   onPressed: () {
-                    ref
-                        .read(authenticationServiceProvider)
-                        .register(username, password)
-                    //TODO redirection ne fonctionne pas
-                    .whenComplete(() => context.push('/pokedex'));
+                    ref.read(authenticationServiceProvider)
+                        .login(username, password);
                   },
                   label: Text(
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: PokedexColors.grayScale[100],
-                          ),
-                      'Submit'),
+                        color: PokedexColors.grayScale[100],
+                      ),
+                      'Login'),
                 ),
               )
             ],
