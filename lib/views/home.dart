@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:poke/components/home_button.dart';
@@ -18,7 +19,6 @@ class Home extends StatelessWidget {
         ),
       ),
       body: Container(
-        //alignment: Alignment.center,
         color: PokedexColors.grayScale[100],
         child: const Stack(
           fit: StackFit.expand,
@@ -27,7 +27,6 @@ class Home extends StatelessWidget {
               padding: EdgeInsets.only(top: 5),
               child: Image(
                 alignment: Alignment.topCenter,
-                /*fit: BoxFit.cover,*/
                 image: AssetImage("lib/assets/images/banniere_pokemon.jpg"),
               ),
             ),
@@ -49,11 +48,14 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
-            Image(
+            // TODO : lorsqu'il y a l'image, les buttons ne sont plus cliquables
+            */
+/*Image(
               alignment: Alignment.bottomCenter,
-              /*fit: BoxFit.cover,*/
+              fit: BoxFit.fitWidth,
               image: AssetImage("lib/assets/images/pokeball.jpg"),
-            ),
+            ),*//*
+
           ],
         ),
       ),
@@ -61,3 +63,4 @@ class Home extends StatelessWidget {
     );
   }
 }
+*/

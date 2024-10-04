@@ -7,35 +7,38 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   AuthenticationRepositoryImpl(this.dio);
 
   @override
-  Future<void> login(String username, String password) async {
+  Future<bool> login(String username, String password) async {
     Response response = await dio.post("/auth/login", data: '''{
         "username": "$username",
         "password": "$password"
             }''');
     if (response.statusCode == 200) {
+      return true;
     } else {
-      throw Exception("Invalid credentials");
+      return false;
     }
   }
 
   @override
-  Future<void> register(String username, String password) async {
+  Future<bool> register(String username, String password) async {
     Response response = await dio.post("/auth/register", data: '''{
         "username": "$username",
         "password": "$password"
             }''');
     if (response.statusCode == 200) {
+      return true;
     } else {
-      throw Exception("Try again");
+      return false;
     }
   }
 
   @override
-  Future<void> logout() async {
+  Future<bool> logout() async {
     Response response = await dio.get("/logout");
     if (response.statusCode == 200) {
+      return true;
     } else {
-      throw Exception("Try again");
+      return false;
     }
   }
 }

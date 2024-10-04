@@ -13,7 +13,7 @@ import '../views/versions.dart';
 class GoRouterConfig {
   static GoRouter router() {
     return GoRouter(
-      initialLocation: '/home',
+      initialLocation: '/login',
       routes: [
         GoRoute(
             path: '/pokedex',
@@ -35,10 +35,6 @@ class GoRouterConfig {
             path: '/pokemon/:id',
             builder: (context, state) =>
                 PokemonComplete(pokemonId: state.pathParameters['id']!)
-        ),
-        GoRoute(
-          path: '/home',
-          builder: (context, state) => const Home(),
         ),
         GoRoute(
             path: '/register',

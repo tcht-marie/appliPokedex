@@ -14,7 +14,7 @@ import 'package:poke/infrastructure/repositories/pokemon_repository_impl.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final cookieJar = CookieJar();
-  final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080'));
+  final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080', validateStatus: (status) => true));
   dio.interceptors.add(CookieManager(cookieJar));
   return dio;
 });
@@ -42,3 +42,4 @@ final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
       AuthenticationServiceImpl(ref.read(_authRepositoryProvider));
   return authenticationService;
 });
+

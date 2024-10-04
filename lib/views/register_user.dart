@@ -2,25 +2,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:poke/components/input_form.dart';
-import 'package:poke/config/colors.dart';
+import 'package:poke/components/user_form.dart';
 import 'package:poke/config/providers.dart';
 
 import '../components/poke_nav_bar.dart';
 
-class RegisterUser extends ConsumerStatefulWidget {
+class RegisterUser extends ConsumerWidget {
   const RegisterUser({super.key});
 
-  @override
-  ConsumerState<RegisterUser> createState() => _RegisterUserState();
-}
+  Future<void> _handleSubmit(username, password, formKey, context, ref) async {
+    if (formKey.currentState!.validate()) {
+      final authService = ref.read(authenticationServiceProvider);
+      final isRegistered = await authService.register(username, password);
 
-class _RegisterUserState extends ConsumerState<RegisterUser> {
-  String username = "";
-  String password = "";
+      if (isRegistered) {
+        context.push('/login');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Registration failed. Please try again.')),
+        );
+      }
+    }
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,59 +35,9 @@ class _RegisterUserState extends ConsumerState<RegisterUser> {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        color: PokedexColors.grayScale[100],
-        child: Form(
-          child: Column(
-            children: [
-              InputForm(
-                text: 'Username',
-                icons: Icons.person_outline,
-                stateRegister: (inputUsername) {
-                  setState(() {
-                    username = inputUsername;
-                  });
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: InputForm(
-                  text: 'Password',
-                  icons: Icons.password_outlined,
-                  stateRegister: (inputPassword) {
-                    setState(() {
-                      password = inputPassword;
-                    });
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: ActionChip(
-                  backgroundColor: PokedexColors.identity,
-                  padding: const EdgeInsets.all(15),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
-                  side: const BorderSide(width: 0),
-                  onPressed: () {
-                    ref
-                        .read(authenticationServiceProvider)
-                        .register(username, password)
-                    //TODO redirection ne fonctionne pas
-                    .whenComplete(() => context.push('/pokedex'));
-                  },
-                  label: Text(
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: PokedexColors.grayScale[100],
-                          ),
-                      'Submit'),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+      body: UserForm(
+          submit: (username, password, formKey, context) =>
+              _handleSubmit(username, password, formKey, context, ref)),
       bottomNavigationBar: const PokeNavBar(index: 4),
     );
   }

@@ -8,17 +8,17 @@ class AuthenticationServiceImpl implements AuthenticationService {
   AuthenticationServiceImpl(this.authenticationRepository);
 
   @override
-  Future<void> login(String username, String password) {
+  Future<bool> login(String username, String password) {
     return authenticationRepository.login(username, password);
   }
 
   @override
-  Future<void> logout() {
+  Future<bool> logout() {
     return authenticationRepository.logout();
   }
 
   @override
-  Future<void> register(String username, String password) {
+  Future<bool> register(String username, String password) {
     return authenticationRepository.register(username, password);
   }
 
