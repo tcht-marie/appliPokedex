@@ -10,7 +10,6 @@ import '../components/poke_nav_bar.dart';
 import '../components/pokedex_box.dart';
 
 class Pokedex extends ConsumerStatefulWidget {
-
   const Pokedex({super.key});
 
   @override
@@ -37,7 +36,8 @@ class _PokedexState extends ConsumerState<Pokedex> {
     try {
       _offset = 0;
       _hasNextPage = true;
-      final pokedexPage = await ref.read(pokemonServiceProvider)
+      final pokedexPage = await ref
+          .read(pokemonServiceProvider)
           .getPokemonsByPage(limit: _limit, offset: _offset);
       setState(() {
         _pokemons = pokedexPage;
@@ -64,7 +64,8 @@ class _PokedexState extends ConsumerState<Pokedex> {
   void _searchPokemon(String input) async {
     _offset = 0;
     _hasNextPage = true;
-    final searchQuery = await ref.read(pokemonServiceProvider)
+    final searchQuery = await ref
+        .read(pokemonServiceProvider)
         .getPokedexByName(limit: _limit, offset: _offset, query: input);
     if (searchQuery.length < _limit) {
       setState(() {
@@ -95,7 +96,8 @@ class _PokedexState extends ConsumerState<Pokedex> {
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
         final pokedexPage = _query.isEmpty
-            ? await ref.read(pokemonServiceProvider)
+            ? await ref
+                .read(pokemonServiceProvider)
                 .getPokemonsByPage(limit: _limit, offset: _offset)
             : await ref.read(pokemonServiceProvider).getPokedexByName(
                 limit: _limit, offset: _offset, query: _query);
@@ -175,8 +177,7 @@ class _PokedexState extends ConsumerState<Pokedex> {
           : Container(
               color: PokedexColors.grayScale[100],
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
                     Expanded(

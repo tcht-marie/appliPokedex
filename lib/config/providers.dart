@@ -12,9 +12,15 @@ import 'package:poke/infrastructure/repositories/authentication_repository_impl.
 import 'package:poke/infrastructure/repositories/mapper/pokemon_mapper.dart';
 import 'package:poke/infrastructure/repositories/pokemon_repository_impl.dart';
 
+import '../notifier/authentication_notifier.dart';
+
+// provider == singleton
+// donc provider instancier qu'une fois ici mais dispo par injection (grâce à ref) partout où j'en ai besoin
+
 final dioProvider = Provider<Dio>((ref) {
   final cookieJar = CookieJar();
-  final dio = Dio(BaseOptions(baseUrl: 'http://localhost:8080', validateStatus: (status) => true));
+  final dio = Dio(BaseOptions(
+      baseUrl: 'http://localhost:8080', validateStatus: (status) => true));
   dio.interceptors.add(CookieManager(cookieJar));
   return dio;
 });
@@ -43,3 +49,6 @@ final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
   return authenticationService;
 });
 
+final authenticationNotifierProvider =
+    AsyncNotifierProvider<AuthenticationNotifier, void>(
+        AuthenticationNotifier.new);

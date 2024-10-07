@@ -21,69 +21,76 @@ class _UserFormState extends State<UserForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(30),
       color: PokedexColors.grayScale[100],
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Image(
-                  alignment: Alignment.topCenter,
-                  image: AssetImage("lib/assets/images/banniere_pokemon.jpg"),
+      child: Column(
+        children: [
+          const Image(
+            alignment: Alignment.topCenter,
+            image: AssetImage("lib/assets/images/banniere_pokemon.jpg"),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          username = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a username';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        icon: Icon(
+                            color: PokedexColors.identity,
+                            Icons.person_outline),
+                        label: const Text('Username'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: TextFormField(
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        onChanged: (value) {
+                          setState(() {
+                            password = value;
+                          });
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a password';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          icon: Icon(
+                              color: PokedexColors.identity,
+                              Icons.password_outlined),
+                          label: const Text('Password'),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ElevatedButton(
+                        onPressed: () => widget.submit(
+                            username, password, _formKey, context),
+                        child: const Text("Submit"),
+                      ),
+                    ),
+                    ...widget.children,
+                  ],
                 )),
-            TextFormField(
-              onChanged: (value) {
-                setState(() {
-                  username = value;
-                });
-              },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a username';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                icon: Icon(color: PokedexColors.identity, Icons.person_outline),
-                label: const Text('Username'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: TextFormField(
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                onChanged: (value) {
-                  setState(() {
-                    password = value;
-                  });
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  icon: Icon(
-                      color: PokedexColors.identity, Icons.password_outlined),
-                  label: const Text('Password'),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () => widget.submit(username, password, _formKey, context),
-                child: const Text("Submit"),
-              ),
-            ),
-            ...widget.children,
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

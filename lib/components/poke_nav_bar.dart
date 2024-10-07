@@ -43,9 +43,9 @@ class PokeNavBar extends StatelessWidget {
         ),
         NavigationDestination(
             icon: IconButton(
-                onPressed: () => context.go('/home'),
+                onPressed: () => context.go('/login'),
                 icon: const Icon(Icons.home_outlined)),
-            label: 'Home')
+            label: 'Login')
       ],
     );
   }

@@ -1,6 +1,7 @@
+import 'dart:nativewrappers/_internal/vm/lib/mirrors_patch.dart';
+
 import 'package:go_router/go_router.dart';
-import 'package:poke/domain/services/authentication_service.dart';
-import 'package:poke/views/home.dart';
+import 'package:poke/config/providers.dart';
 import 'package:poke/views/items.dart';
 import 'package:poke/views/moves.dart';
 import 'package:poke/views/pokedex.dart';
@@ -11,9 +12,16 @@ import '../views/login.dart';
 import '../views/versions.dart';
 
 class GoRouterConfig {
-  static GoRouter router() {
+  static GoRouter router(ref) {
+    final notifier = ref.read(authenticationNotifierProvider.notifier);
     return GoRouter(
+      refreshListenable: notifier,
       initialLocation: '/login',
+      redirect: (context, state) => {
+        if (state.matchedLocation == "/home") {
+          if (ref.read(authenticationServiceProvider))
+        }
+      },
       routes: [
         GoRoute(
             path: '/pokedex',

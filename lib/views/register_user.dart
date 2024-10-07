@@ -16,7 +16,7 @@ class RegisterUser extends ConsumerWidget {
       final isRegistered = await authService.register(username, password);
 
       if (isRegistered) {
-        context.push('/login');
+        GoRouter.of(context).push('/login');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
