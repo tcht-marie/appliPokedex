@@ -41,7 +41,7 @@ class PokedexBox extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: pokedexAction == null
                       ? Padding(
-                          padding: const EdgeInsets.only(top: 8, right: 8),
+                          padding: const EdgeInsets.only(top: 8, right: 6),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

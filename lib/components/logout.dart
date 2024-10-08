@@ -6,7 +6,6 @@ import 'package:poke/config/providers.dart';
 
 import '../config/colors.dart';
 
-
 class Logout extends ConsumerWidget {
   const Logout({super.key});
 
@@ -20,12 +19,11 @@ class Logout extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return FloatingActionButton(
-      backgroundColor: PokedexColors.identity,
+    return IconButton(
       onPressed: () => _handleSubmit(context, ref),
-      child: Icon(
-          Icons.logout_outlined,
+      icon: Icon(
         color: PokedexColors.grayScale[100],
+        Icons.logout_outlined,
       ),
     );
   }

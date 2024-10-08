@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poke/components/logout.dart';
 import 'package:poke/components/pokedex_box.dart';
+import 'package:poke/components/text_my_pokedex.dart';
 import 'package:poke/config/providers.dart';
 
 import '../components/poke_nav_bar.dart';
@@ -13,15 +15,14 @@ class MyPokedex extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(pokemonServiceProvider).getTrainerPokedex();
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "My Pokedex",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        actions: const [
-          Logout(),
-        ],
+        actions: const [Logout()],
       ),
       body: FutureBuilder(
           future: ref.read(pokemonServiceProvider).getTrainerPokedex(),
@@ -41,6 +42,24 @@ class MyPokedex extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: pokemon.isNotEmpty
+                              ? TextMyPokedex(
+                                  description:
+                                      "Long press here to reset your Pokédex.",
+                                  action: () {
+                                    ref
+                                        .read(pokemonServiceProvider)
+                                        .deleteAllPokemonsToPokedexTrainer();
+                                    ref
+                                        .refresh(pokemonServiceProvider)
+                                        .getTrainerPokedex();
+                                  })
+                              : TextMyPokedex(
+                                  action: () => context.push("/pokedex"),
+                                  description:
+                                      "Your Pokédex is empty. To add your Pokémons, long press here to go to Pokédex page.")),
                       Expanded(
                           child: GridView.builder(
                               itemCount: pokemon.length,
@@ -57,15 +76,19 @@ class MyPokedex extends ConsumerWidget {
                                     pokedexAction: IconButton(
                                         visualDensity: const VisualDensity(
                                             horizontal: -4, vertical: -4),
-                                        iconSize: 12,
+                                        iconSize: 16,
                                         onPressed: () async {
                                           await ref
                                               .read(pokemonServiceProvider)
                                               .deletePokemonToPokedexTrainer(
                                                   pokedex.id);
-                                          ref.refresh(pokemonServiceProvider).getTrainerPokedex();
+                                          ref
+                                              .refresh(pokemonServiceProvider)
+                                              .getTrainerPokedex();
                                         },
-                                        icon: const Icon(Icons.remove)));
+                                        icon: Icon(
+                                            color: PokedexColors.identity,
+                                            Icons.remove)));
                               }))
                     ],
                   ),
@@ -74,7 +97,7 @@ class MyPokedex extends ConsumerWidget {
             } else {
               return Scaffold(
                 appBar: AppBar(
-                  title: const Text("oups"),
+                  title: const Text("My Pokédex"),
                 ),
                 body: const Center(child: Text('No Pokémon data found')),
               );

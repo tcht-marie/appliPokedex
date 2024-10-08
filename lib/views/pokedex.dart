@@ -199,9 +199,10 @@ class _PokedexState extends ConsumerState<Pokedex> {
                               imageUrl: pokedex.imageUrl,
                               pokedexAction: ifUserExist
                                   ? IconButton(
+                                      color: PokedexColors.identity,
                                       visualDensity: const VisualDensity(
                                           horizontal: -4, vertical: -4),
-                                      iconSize: 12,
+                                      iconSize: 16,
                                       onPressed: () async {
                                         await ref
                                             .read(pokemonServiceProvider)
