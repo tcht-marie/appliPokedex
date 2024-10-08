@@ -141,6 +141,9 @@ class _PokedexState extends ConsumerState<Pokedex> {
 
   @override
   Widget build(BuildContext context) {
+    final ifUserExist =
+        ref.read(authenticationNotifierProvider.notifier).isLoggedIn;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
@@ -193,7 +196,20 @@ class _PokedexState extends ConsumerState<Pokedex> {
                               id: pokedex.id,
                               name: pokedex.name,
                               idLabel: pokedex.idLabel,
-                              imageUrl: pokedex.imageUrl);
+                              imageUrl: pokedex.imageUrl,
+                              pokedexAction: ifUserExist
+                                  ? IconButton(
+                                      visualDensity: const VisualDensity(
+                                          horizontal: -4, vertical: -4),
+                                      iconSize: 12,
+                                      onPressed: () async {
+                                        await ref
+                                            .read(pokemonServiceProvider)
+                                            .addPokemonToPokedexTrainer(
+                                                pokedex.id);
+                                      },
+                                      icon: const Icon(Icons.add))
+                                  : null);
                         },
                       ),
                     ),

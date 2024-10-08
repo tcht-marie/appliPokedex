@@ -12,8 +12,8 @@ class RegisterUser extends ConsumerWidget {
 
   Future<void> _handleSubmit(username, password, formKey, context, ref) async {
     if (formKey.currentState!.validate()) {
-      final authService = ref.read(authenticationServiceProvider);
-      final isRegistered = await authService.register(username, password);
+      final authNotifier = ref.read(authenticationNotifierProvider.notifier);
+      final isRegistered = await authNotifier.register(username, password);
 
       if (isRegistered) {
         GoRouter.of(context).push('/login');

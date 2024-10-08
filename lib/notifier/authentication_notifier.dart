@@ -14,7 +14,7 @@ class AuthenticationNotifier extends AsyncNotifier<void> implements Listenable {
   // Indique si l'utilisateur est vu comme connecte dans l'application
   bool get isLoggedIn => _isLoggedIn;
 
-  Future<void> logout() async {
+  Future<bool> logout() async {
     if (_isLoggedIn == true) {
       bool logoutResult = await ref.read(authenticationServiceProvider).logout();
       if (logoutResult) {
@@ -23,7 +23,9 @@ class AuthenticationNotifier extends AsyncNotifier<void> implements Listenable {
           listener();
         }
       }
+      return logoutResult;
     }
+    return true;
   }
 
   Future<bool> login(String username, String password) async {

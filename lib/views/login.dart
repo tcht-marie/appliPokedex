@@ -16,11 +16,11 @@ class Login extends ConsumerWidget {
   Future<void> _handleSubmit(username, password, formKey, context, ref) async {
     if (formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      final authService = ref.read(authenticationServiceProvider);
-      final isAuthenticated = await authService.login(username, password);
+      final authNotifier = ref.read(authenticationNotifierProvider.notifier);
+      final isAuthenticated = await authNotifier.login(username, password);
 
       if (isAuthenticated) {
-        GoRouter.of(context).push('/pokedex');
+        GoRouter.of(context).go('/mypokedex');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Login failed. Please try again.')));

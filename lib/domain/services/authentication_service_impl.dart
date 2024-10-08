@@ -7,8 +7,6 @@ class AuthenticationServiceImpl implements AuthenticationService {
 
   AuthenticationServiceImpl(this.authenticationRepository);
 
-  bool isLoggedIn = false;
-
   @override
   Future<bool> login(String username, String password) {
     return authenticationRepository.login(username, password);

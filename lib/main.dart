@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:poke/config/router.dart';
 import 'package:poke/config/theme.dart';
-import 'package:poke/domain/repositories/pokemon_repository.dart';
-import 'package:poke/domain/services/pokemon_service.dart';
-import 'package:poke/domain/services/pokemon_service_impl.dart';
-import 'package:poke/infrastructure/repositories/mapper/pokemon_mapper.dart';
-import 'package:poke/infrastructure/repositories/pokemon_repository_impl.dart';
-import 'package:poke/views/items.dart';
-import 'package:poke/views/moves.dart';
-import 'package:poke/views/pokedex.dart';
-import 'package:poke/views/pokemon.dart';
-import 'package:poke/views/register_user.dart';
-import 'package:poke/views/versions.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     return ProviderScope(
         child: MaterialApp.router(
       title: 'Pokédex',
       theme: ThemeConfig.createTheme(),
-      routerConfig: GoRouterConfig.router(),
+      routerConfig: ref.read(goRouterProvider)
     ));
   }
 }
