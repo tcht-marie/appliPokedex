@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/components/list_item.dart';
 import 'package:poke/components/type_chip.dart';
-import 'package:poke/config/colors.dart';
 import 'package:poke/config/providers.dart';
-import 'package:poke/domain/services/pokemon_service.dart';
 
 import '../components/poke_nav_bar.dart';
 import '../domain/models/move_details.dart';
 
 class Moves extends ConsumerStatefulWidget {
-
   const Moves({super.key});
 
   @override
@@ -37,7 +34,9 @@ class _MovesState extends ConsumerState<Moves> {
     try {
       final movePage =
           // appel au pokemonService
-          await ref.read(pokemonServiceProvider).getMoveDetailsByPage(_limit, _offset);
+          await ref
+              .read(pokemonServiceProvider)
+              .getMoveDetailsByPage(_limit, _offset);
       setState(() {
         // mise à jour de la liste
         _moves = movePage;
@@ -74,8 +73,9 @@ class _MovesState extends ConsumerState<Moves> {
       _offset += _limit;
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
-        final movePage =
-            await ref.read(pokemonServiceProvider).getMoveDetailsByPage(_limit, _offset);
+        final movePage = await ref
+            .read(pokemonServiceProvider)
+            .getMoveDetailsByPage(_limit, _offset);
         setState(() {
           // ajout des nouveaux éléments en gardant aussi ceux d'avant
           _moves = [..._moves, ...movePage];

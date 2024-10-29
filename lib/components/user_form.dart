@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:poke/core/widget_keys.dart';
 
 import '../config/colors.dart';
 
@@ -35,6 +36,7 @@ class _UserFormState extends State<UserForm> {
                 child: Column(
                   children: [
                     TextFormField(
+                      key: WidgetKeys.loginUsername,
                       onChanged: (value) {
                         setState(() {
                           username = value;
@@ -56,6 +58,7 @@ class _UserFormState extends State<UserForm> {
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: TextFormField(
+                        key: WidgetKeys.loginPassword,
                         obscureText: true,
                         enableSuggestions: false,
                         autocorrect: false,
@@ -81,6 +84,7 @@ class _UserFormState extends State<UserForm> {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: ElevatedButton(
+                        key: WidgetKeys.loginButton,
                         onPressed: () => widget.submit(
                             username, password, _formKey, context),
                         child: const Text("Submit"),

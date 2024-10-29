@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poke/components/user_form.dart';
 import 'package:poke/config/providers.dart';
+import 'package:poke/core/widget_keys.dart';
 
 import '../components/poke_nav_bar.dart';
 
@@ -20,6 +21,7 @@ class RegisterUser extends ConsumerWidget {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
+            key: WidgetKeys.loginErrorSnackBar,
               content: Text('Registration failed. Please try again.')),
         );
       }
@@ -35,6 +37,7 @@ class RegisterUser extends ConsumerWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
+      /*appBar: MyAppBar(titlePage: "Register"),*/
       body: UserForm(
           submit: (username, password, formKey, context) =>
               _handleSubmit(username, password, formKey, context, ref)),

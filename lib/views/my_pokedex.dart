@@ -5,6 +5,7 @@ import 'package:poke/components/logout.dart';
 import 'package:poke/components/pokedex_box.dart';
 import 'package:poke/components/text_my_pokedex.dart';
 import 'package:poke/config/providers.dart';
+import 'package:poke/core/widget_keys.dart';
 
 import '../components/poke_nav_bar.dart';
 import '../config/colors.dart';
@@ -15,7 +16,6 @@ class MyPokedex extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(pokemonServiceProvider).getTrainerPokedex();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -25,7 +25,7 @@ class MyPokedex extends ConsumerWidget {
         actions: const [Logout()],
       ),
       body: FutureBuilder(
-          future: ref.read(pokemonServiceProvider).getTrainerPokedex(),
+          future: ref.watch(pokemonServiceProvider).getTrainerPokedex(),
           builder:
               (BuildContext context, AsyncSnapshot<List<Pokemon>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -57,6 +57,7 @@ class MyPokedex extends ConsumerWidget {
                                         .getTrainerPokedex();
                                   })
                               : TextMyPokedex(
+                                  key: WidgetKeys.userPokedexEmpty,
                                   action: () => context.push("/pokedex"),
                                   description:
                                       "Your Pokédex is empty. To add your Pokémons, long press here to go to Pokédex page.")),
@@ -97,7 +98,10 @@ class MyPokedex extends ConsumerWidget {
             } else {
               return Scaffold(
                 appBar: AppBar(
-                  title: const Text("My Pokédex"),
+                  title: Text(
+                    "My Pokédex",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
                 body: const Center(child: Text('No Pokémon data found')),
               );

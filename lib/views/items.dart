@@ -4,12 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/components/list_item.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/domain/models/item_details.dart';
-import 'package:poke/domain/services/pokemon_service.dart';
 
 import '../components/poke_nav_bar.dart';
 
 class Items extends ConsumerStatefulWidget {
-
   // constructeur
   const Items({super.key});
 
@@ -45,7 +43,8 @@ class _ItemsState extends ConsumerState<Items> {
     });
     try {
       // récupération des éléments en appelant le pokemonService
-      final itemPage = await ref.read(pokemonServiceProvider)
+      final itemPage = await ref
+          .read(pokemonServiceProvider)
           .getItemDetailsByPage(limit: _limit, offset: _offset);
       setState(() {
         // mise à jour de la liste d'éléments
@@ -81,7 +80,8 @@ class _ItemsState extends ConsumerState<Items> {
       _offset += _limit;
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
-        final itemPage = await ref.read(pokemonServiceProvider)
+        final itemPage = await ref
+            .read(pokemonServiceProvider)
             .getItemDetailsByPage(limit: _limit, offset: _offset);
         setState(() {
           // ajout des nouveaux éléments en gardant aussi ceux d'avant
@@ -124,44 +124,44 @@ class _ItemsState extends ConsumerState<Items> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Item Details",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
+      appBar: AppBar(
+        title: Text(
+          "Items",
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        body: _isFirstLoadRunning
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(children: [
-                Expanded(
-                    child: ListView.builder(
-                        // controller
-                        controller: _controller,
-                        // nombre d'éléments dans la liste
-                        itemCount: _items.length,
-                        itemBuilder: (BuildContext context, index) {
-                          final item = _items[index];
-                          return ExpansionTile(
-                            leading: Image.network(item.spriteUrl),
-                            title: Text(
-                                style: Theme.of(context).textTheme.titleMedium,
-                                item.name),
-                            children: <Widget>[
-                              ListItem(item: item.effect),
-                              ListItem(item: 'Category: ${item.category}'),
-                            ],
-                          );
-                        })),
-                if (_isLoadMoreRunning)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 40),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-              ]),
+      ),
+      body: _isFirstLoadRunning
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(children: [
+              Expanded(
+                  child: ListView.builder(
+                      // controller
+                      controller: _controller,
+                      // nombre d'éléments dans la liste
+                      itemCount: _items.length,
+                      itemBuilder: (BuildContext context, index) {
+                        final item = _items[index];
+                        return ExpansionTile(
+                          leading: Image.network(item.spriteUrl),
+                          title: Text(
+                              style: Theme.of(context).textTheme.titleMedium,
+                              item.name),
+                          children: <Widget>[
+                            ListItem(item: item.effect),
+                            ListItem(item: 'Category: ${item.category}'),
+                          ],
+                        );
+                      })),
+              if (_isLoadMoreRunning)
+                const Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 40),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+            ]),
       bottomNavigationBar: const PokeNavBar(index: 1),
     );
   }

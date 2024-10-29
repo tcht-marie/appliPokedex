@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:poke/core/widget_keys.dart';
 
 import '../config/colors.dart';
 
@@ -43,6 +44,7 @@ class PokeNavBar extends StatelessWidget {
         ),
         NavigationDestination(
             icon: IconButton(
+              key: WidgetKeys.loginScreen,
                 onPressed: () => context.go('/mypokedex'),
                 icon: const Icon(Icons.home_outlined)),
             label: 'Home')
