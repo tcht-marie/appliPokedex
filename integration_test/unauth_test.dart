@@ -19,16 +19,11 @@ void main() {
 
   testWidgets("Login", (tester) async {
     Dio mockDio = Dio();
-    final container = ProviderContainer(overrides: [
-      dioProvider.overrideWithValue(mockDio),
-    ]);
-
-    await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const MyApp()));
 
     loginRobot = LoginRobot(tester);
 
     final mockPokedex = stubForTest({
-      "http://localhost:8080/pokemons": {
+      "/pokemons": {
         "GET": {
           "status": 200,
           "data": "[]"
@@ -37,22 +32,29 @@ void main() {
     });
 
     final mockLogin = stubForTest({
-      "http://localhost:8080/auth/login": {
+      "/auth/login": {
         "POST": {
           "status": 200
         }
       }
     });
 
-    /*final mockPokedexUser = stubForTest({
+    final mockPokedexUser = stubForTest({
       "/pokemons/pokedex/me": {
         "GET": {
           "status": 200,
           "data": "[]"
         }
       }
-    });*/
-    mockDio.interceptors.addAll([mockPokedex, mockLogin]);
+    });
+    mockDio.interceptors.addAll([mockPokedex, mockLogin, mockPokedexUser]);
+
+
+    final container = ProviderContainer(overrides: [
+      dioProvider.overrideWithValue(mockDio),
+    ]);
+
+    await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const MyApp()));
 
     await loginRobot.goToLoginPage();
     await loginRobot.enterUsername('Marie');
