@@ -135,10 +135,10 @@ class _ItemsState extends ConsumerState<Items> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Column(children: [
+          : Column(
+          children: [
               Expanded(
                   child: ListView.builder(
-                      key: WidgetKeys.detailsItem,
                       // controller
                       controller: _controller,
                       // nombre d'éléments dans la liste
@@ -146,6 +146,7 @@ class _ItemsState extends ConsumerState<Items> {
                       itemBuilder: (BuildContext context, index) {
                         final item = _items[index];
                         return ExpansionTile(
+                          key: WidgetKeys.detailsItem,
                           leading: Image.network(item.spriteUrl),
                           title: Text(
                               style: Theme.of(context).textTheme.titleMedium,

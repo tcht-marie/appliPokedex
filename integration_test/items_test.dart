@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:poke/components/list_item.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/core/widget_keys.dart';
 import 'package:poke/main.dart';
@@ -22,7 +21,10 @@ void main() {
     itemsRobot = ItemsRobot(tester);
 
     final mockItems = stubForTest({
-      "/pokemons/items": {
+      "/pokemons": {
+        "GET": {"status": 200, "data": "[]"}
+      },
+      "/pokemons/items?limit=3&offset=0": {
         "GET": {
           "status": 200,
           "data": '''
@@ -63,12 +65,12 @@ void main() {
         UncontrolledProviderScope(container: container, child: const MyApp()));
 
     await itemsRobot.goToItemsPage();
-    await tester.pump(const Duration(seconds: 5));
+    /*await tester.pump(const Duration(seconds: 5));
+    await itemsRobot.tapToListItem();*/
     expect(find.byKey(WidgetKeys.detailsItem), findsNWidgets(3));
-    /*await itemsRobot.tapToListItem();
-    await tester.pump(const Duration(seconds: 5));
-    expect(find.byType(ListItem), findsNWidgets(3));*/
+    //await tester.pump(const Duration(seconds: 5));
+    //expect(find.byType(ListItem), findsNWidgets(3));
 
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 5));
   });
 }

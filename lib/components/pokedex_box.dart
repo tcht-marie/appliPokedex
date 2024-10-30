@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poke/config/colors.dart';
+import 'package:poke/core/widget_keys.dart';
 
 class PokedexBox extends StatelessWidget {
   final String idLabel;
@@ -24,6 +25,7 @@ class PokedexBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: WidgetKeys.completePokemon,
       margin: const EdgeInsets.all(6.0),
       decoration: BoxDecoration(
         boxShadow: const [

@@ -20,6 +20,9 @@ void main() {
     versionsRobot = VersionsRobot(tester);
 
     final mockVersions = stubForTest({
+      "/pokemons": {
+        "GET": {"status": 200, "data": "[]"}
+      },
       "/pokemons/versions": {
         "GET": {
           "status": 200,
@@ -56,8 +59,7 @@ void main() {
         UncontrolledProviderScope(container: container, child: const MyApp()));
 
     await versionsRobot.goToVersionsPage();
-    //expect(find.byType(VersionBox), findsNWidgets(4));
-    //await tester.pump(const Duration(seconds: 5));
+    expect(find.byType(VersionBox), findsNWidgets(4));
     await tester.pumpAndSettle(const Duration(seconds: 5));
   });
 }

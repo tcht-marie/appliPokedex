@@ -7,6 +7,7 @@ import 'package:poke/config/providers.dart';
 import 'package:poke/main.dart';
 
 import '../test/interceptor_test.dart';
+import 'robots/pokemon_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

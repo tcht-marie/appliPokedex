@@ -11,4 +11,5 @@ class WidgetKeys {
   static const Key detailsItem = Key('detailsItem');
   static const Key itemsScreen = Key('itemsScreen');
   static const Key versionsScreen = Key('versionsScreen');
+  static const Key completePokemon = Key('completePokemon');
 }
