@@ -7,17 +7,14 @@ import 'package:poke/config/providers.dart';
 import 'package:poke/main.dart';
 
 import '../test/interceptor_test.dart';
-import '../test/mock.mocks.dart';
 import 'robots/login_robot.dart';
-
-/* dart run build_runner build */
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   late LoginRobot loginRobot;
 
-  testWidgets("Login", (tester) async {
+  testWidgets("Successful Login", (tester) async {
     Dio mockDio = Dio();
 
     loginRobot = LoginRobot(tester);
@@ -28,18 +25,13 @@ void main() {
           "status": 200,
           "data": "[]"
         }
-      }
-    });
-
-    final mockLogin = stubForTest({
+      },
       "/auth/login": {
         "POST": {
-          "status": 200
+          "status": 200,
+          "data": '{}'
         }
-      }
-    });
-
-    final mockPokedexUser = stubForTest({
+      },
       "/pokemons/pokedex/me": {
         "GET": {
           "status": 200,
@@ -47,8 +39,8 @@ void main() {
         }
       }
     });
-    mockDio.interceptors.addAll([mockPokedex, mockLogin, mockPokedexUser]);
 
+    mockDio.interceptors.add(mockPokedex);
 
     final container = ProviderContainer(overrides: [
       dioProvider.overrideWithValue(mockDio),
@@ -60,7 +52,44 @@ void main() {
     await loginRobot.enterUsername('Marie');
     await loginRobot.enterPassword('test');
     await loginRobot.tapLoginButton();
-    //await loginRobot.verifyUserEmptyPokedex();
+    await loginRobot.verifyUserEmptyPokedex();
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets("Failed Login", (tester) async {
+    Dio mockDio = Dio();
+
+    loginRobot = LoginRobot(tester);
+
+    final mockPokedex = stubForTest({
+      "/pokemons": {
+        "GET": {
+          "status": 200,
+          "data": "[]"
+        }
+      },
+      "/auth/login": {
+        "POST": {
+          "status": 403,
+          "data": '{}'
+        }
+      }
+    });
+
+    mockDio.interceptors.add(mockPokedex);
+
+    final container = ProviderContainer(overrides: [
+      dioProvider.overrideWithValue(mockDio),
+    ]);
+
+    await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const MyApp()));
+
+    await loginRobot.goToLoginPage();
+    await loginRobot.enterUsername('Marie');
+    await loginRobot.enterPassword('test');
+    await loginRobot.tapLoginButton();
+    await loginRobot.verifyError();
 
     await tester.pumpAndSettle();
   });

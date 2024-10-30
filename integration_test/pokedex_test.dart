@@ -11,7 +11,7 @@ import '../test/interceptor_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets("Affichage page pokedex", (tester) async {
+  testWidgets("Display Pokedex page", (tester) async {
     Dio mockDio = Dio();
 
     final mockPokedex = stubForTest({

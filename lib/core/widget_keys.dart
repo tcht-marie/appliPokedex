@@ -8,4 +8,7 @@ class WidgetKeys {
   static const Key loginButton = Key('loginButton');
   static const Key userPokedexEmpty = Key('userPokedexEmpty');
   static const Key loginErrorSnackBar = Key('loginErrorSnackBar');
+  static const Key detailsItem = Key('detailsItem');
+  static const Key itemsScreen = Key('itemsScreen');
+  static const Key versionsScreen = Key('versionsScreen');
 }

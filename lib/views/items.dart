@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/components/list_item.dart';
 import 'package:poke/config/providers.dart';
+import 'package:poke/core/widget_keys.dart';
 import 'package:poke/domain/models/item_details.dart';
 
 import '../components/poke_nav_bar.dart';
@@ -137,6 +138,7 @@ class _ItemsState extends ConsumerState<Items> {
           : Column(children: [
               Expanded(
                   child: ListView.builder(
+                      key: WidgetKeys.detailsItem,
                       // controller
                       controller: _controller,
                       // nombre d'éléments dans la liste

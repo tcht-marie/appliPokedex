@@ -26,12 +26,14 @@ class PokeNavBar extends StatelessWidget {
         ),
         NavigationDestination(
           icon: IconButton(
+            key: WidgetKeys.itemsScreen,
               onPressed: () => context.go('/items'),
               icon: const Icon(Icons.grass)),
           label: 'Items',
         ),
         NavigationDestination(
           icon: IconButton(
+            key: WidgetKeys.versionsScreen,
               onPressed: () => context.go('/versions'),
               icon: const Icon(Icons.water_drop_outlined)),
           label: 'Versions',

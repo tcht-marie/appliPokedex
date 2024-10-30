@@ -41,9 +41,16 @@ class LoginRobot {
     await tester.pump(const Duration(seconds: 5));
   }
 
-  /* REGISTER
+  Future<void> verifyError() async {
+    final errorSnackBar = find.byKey(WidgetKeys.loginErrorSnackBar);
+    expect(errorSnackBar, findsOneWidget);
+    await tester.pump(const Duration(seconds: 1));
+  }
+}
+
+
+/* REGISTER
   void verifyError() {
     final errorSnackBar = find.byKey(WidgetKeys.loginErrorSnackBar);
     expect(errorSnackBar, findsOneWidget);
   }*/
-}
