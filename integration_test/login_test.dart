@@ -53,6 +53,7 @@ void main() {
     await loginRobot.enterPassword('test');
     await loginRobot.tapLoginButton();
     await loginRobot.verifyUserEmptyPokedex();
+    await loginRobot.tapLogoutButton();
 
     await tester.pumpAndSettle();
   });
@@ -94,6 +95,3 @@ void main() {
     await tester.pumpAndSettle();
   });
 }
-
-/* REGISTER
-loginRobot.verifyError();*/

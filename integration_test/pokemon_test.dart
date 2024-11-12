@@ -6,7 +6,6 @@ import 'package:integration_test/integration_test.dart';
 import 'package:poke/components/pokedex_box.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/main.dart';
-import 'package:poke/views/pokemon.dart';
 
 import '../test/interceptor_test.dart';
 import 'robots/pokemon_robot.dart';
@@ -128,7 +127,6 @@ void main() {
     await tester.pump(const Duration(seconds: 5));
     expect(find.byType(PokedexBox), findsNWidgets(1));
     await pokemonRobot.goToCompletePokemon();
-    //expect(find.byType(PokemonComplete), findsOneWidget);
     await tester.pumpAndSettle(const Duration(seconds: 3));
   });
 }

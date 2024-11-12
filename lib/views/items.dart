@@ -139,6 +139,7 @@ class _ItemsState extends ConsumerState<Items> {
           children: [
               Expanded(
                   child: ListView.builder(
+                      key: WidgetKeys.items,
                       // controller
                       controller: _controller,
                       // nombre d'éléments dans la liste

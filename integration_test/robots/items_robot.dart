@@ -14,7 +14,7 @@ class ItemsRobot {
     await tester.pump(const Duration(seconds: 1));
   }
 
-  Future<void> tapToListItem() async {
+  Future<void> tapToListItem(int item) async {
     final detailsItem = find.byKey(WidgetKeys.detailsItem);
     expect(detailsItem, findsOneWidget);
     await tester.tap(detailsItem);

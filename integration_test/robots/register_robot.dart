@@ -1,18 +1,23 @@
 
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:poke/core/widget_keys.dart';
 
-class LoginRobot {
+class RegisterRobot {
   final WidgetTester tester;
 
-  LoginRobot(this.tester);
+  RegisterRobot(this.tester);
 
   Future<void> goToLoginPage() async {
     final loginScreen = find.byKey(WidgetKeys.loginScreen);
     expect(loginScreen, findsOneWidget);
     await tester.tap(loginScreen);
+    await tester.pump(const Duration(seconds: 1));
+  }
+
+  Future<void> goToRegisterPage() async {
+    final registerScreen = find.byKey(WidgetKeys.registerScreen);
+    expect(registerScreen, findsOneWidget);
+    await tester.tap(registerScreen);
     await tester.pump(const Duration(seconds: 1));
   }
 
@@ -30,29 +35,10 @@ class LoginRobot {
     await tester.pump(const Duration(seconds: 3));
   }
 
-  Future<void> tapLoginButton() async {
+  Future<void> tapRegisterButton() async {
     final loginButton = find.byKey(WidgetKeys.loginButton);
     expect(loginButton, findsOneWidget);
     await tester.tap(loginButton);
-    await tester.pump(const Duration(seconds: 3));
-  }
-
-  Future<void> verifyUserEmptyPokedex() async {
-    final userPokedexEmpty = find.byKey(WidgetKeys.userPokedexEmpty);
-    expect(userPokedexEmpty, findsOneWidget);
-    await tester.pump(const Duration(seconds: 5));
-  }
-
-  Future<void> verifyError() async {
-    final errorSnackBar = find.byKey(WidgetKeys.loginErrorSnackBar);
-    expect(errorSnackBar, findsOneWidget);
-    await tester.pump(const Duration(seconds: 1));
-  }
-
-  Future<void> tapLogoutButton() async {
-    final logoutButton = find.byKey(WidgetKeys.logoutButton);
-    expect(logoutButton, findsOneWidget);
-    await tester.tap(logoutButton);
     await tester.pump(const Duration(seconds: 3));
   }
 }

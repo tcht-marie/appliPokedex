@@ -40,6 +40,7 @@ class PokeNavBar extends StatelessWidget {
         ),
         NavigationDestination(
           icon: IconButton(
+              key: WidgetKeys.movesScreen,
               onPressed: () => context.go('/moves'),
               icon: const Icon(Icons.local_fire_department_outlined)),
           label: 'Moves',

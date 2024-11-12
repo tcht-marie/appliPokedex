@@ -43,6 +43,7 @@ class Login extends ConsumerWidget {
             _handleSubmit(username, password, formKey, context, ref),
         children: [
           GestureDetector(
+            key: WidgetKeys.registerScreen,
             onTap: () => context.push("/register"),
             child: const Text(
                 "Don't have an account yet ? Click here to register."),

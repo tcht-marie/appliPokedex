@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/components/list_item.dart';
 import 'package:poke/components/type_chip.dart';
 import 'package:poke/config/providers.dart';
+import 'package:poke/core/widget_keys.dart';
 
 import '../components/poke_nav_bar.dart';
 import '../domain/models/move_details.dart';
@@ -130,6 +131,7 @@ class _MovesState extends ConsumerState<Moves> {
           : Column(children: [
               Expanded(
                   child: ListView.builder(
+                      key: WidgetKeys.moves,
                       padding: const EdgeInsets.all(8),
                       // controller
                       controller: _controller,
@@ -138,6 +140,7 @@ class _MovesState extends ConsumerState<Moves> {
                       itemBuilder: (BuildContext context, index) {
                         final move = _moves[index];
                         return ExpansionTile(
+                          key: WidgetKeys.detailsMoves,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           title: Padding(
