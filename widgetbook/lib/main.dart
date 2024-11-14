@@ -24,7 +24,9 @@ class WidgetbookApp extends StatelessWidget {
           initialDevice: Devices.ios.iPhone13,
         ),
       ],
-        directories: directories,
+        directories: [
+          ...directories
+        ],
     );
   }
 }

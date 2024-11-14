@@ -9,16 +9,12 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(name: 'User form', type: TypeChip)
 Widget buildTypeChipUseCase(BuildContext context) {
-  return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 36, horizontal: 8),
-      child: TypeChip(type: PokemonTypes.dark)
+  PokemonTypes types = context.knobs.list(
+      label: 'Types',
+      options: PokemonTypes.values
+  );
+  return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 8),
+      child: TypeChip(type: types)
   );
 }
-
-
-/*
-String types = context.knobs.list(
-    label: 'Types',
-    options: PokemonTypes.values.map((type) => type.value).toList()
-);
-return TypeChip(type: types as PokemonTypes);*/
