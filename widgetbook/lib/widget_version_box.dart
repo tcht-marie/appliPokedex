@@ -5,10 +5,10 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(name: 'Versionbox', type: VersionBox)
 Widget buildVersionBoxUseCase(BuildContext context) {
-  String name = context.knobs.string(label: 'name', initialValue: 'Red');
+  String name = context.knobs.string(label: 'name', initialValue: 'red');
   return GridView(
     gridDelegate:
-        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
     children: [
       VersionBox(
           name: name,
