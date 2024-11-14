@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:poke/components/stat_pokemon.dart';
 import 'package:poke/domain/models/pokemon_stat.dart';
 import 'package:poke/domain/models/pokemon_types.dart';
@@ -20,14 +21,25 @@ Widget buildStatPokemonUseCase(BuildContext context) {
       options: PokemonTypes.values
   );
 
-  int baseStat = context.knobs.double.slider(
+  int baseStat = context.knobs.int.slider(
       label: 'Base Stat',
       initialValue: 50,
       min: 0,
       max: 250
   ).toInt();
 
-  List<PokemonStat> pokemonStats = ([baseStat, statName]);
+  List<PokemonStat> pokemonStats = [(baseStat: baseStat, statName: statName)];
 
-  return StatPokemon(pokemonStats: pokemonStats, types: types);
+  return Scaffold(
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StatPokemon(pokemonStats: pokemonStats, types: types),
+          StatPokemon(pokemonStats: pokemonStats, types: PokemonTypes.psychic),
+          StatPokemon(pokemonStats: pokemonStats, types: PokemonTypes.grass),
+        ],
+      )
+    ),
+  );
 }

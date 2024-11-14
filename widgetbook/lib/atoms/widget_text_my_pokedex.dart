@@ -5,12 +5,16 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(name: "Text in my pokedex", type: TextMyPokedex)
 Widget buildTextMyPokedexUseCase(BuildContext context) {
-  return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 8),
-      child: TextMyPokedex(
-          action: () {},
-          description: context.knobs.string(
-              label: 'text',
-              initialValue:
-                  "Your Pokédex is empty. To add your Pokémons, long press here to go to Pokédex page.")));
+  return Scaffold(
+    body: Center(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 8),
+          child: TextMyPokedex(
+              action: () {},
+              description: context.knobs.string(
+                  label: 'text',
+                  initialValue:
+                      "Your Pokédex is empty. To add your Pokémons, long press here to go to Pokédex page."))),
+    ),
+  );
 }

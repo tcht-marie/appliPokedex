@@ -11,11 +11,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:widgetbook/widgetbook.dart' as _i1;
 import 'package:widgetbook_workspace/atoms/widget_linear_stat.dart' as _i2;
-import 'package:widgetbook_workspace/atoms/widget_text_my_pokedex.dart' as _i4;
-import 'package:widgetbook_workspace/atoms/widget_type_chip.dart' as _i5;
-import 'package:widgetbook_workspace/molecules/widget_pokedex_box.dart' as _i3;
-import 'package:widgetbook_workspace/molecules/widget_version_box.dart' as _i7;
-import 'package:widgetbook_workspace/organics/widget_user_form.dart' as _i6;
+import 'package:widgetbook_workspace/atoms/widget_text_my_pokedex.dart' as _i7;
+import 'package:widgetbook_workspace/atoms/widget_type_chip.dart' as _i8;
+import 'package:widgetbook_workspace/molecules/widget_pokedex_box.dart' as _i4;
+import 'package:widgetbook_workspace/molecules/widget_search_pokemon.dart'
+    as _i5;
+import 'package:widgetbook_workspace/molecules/widget_stat_pokemon.dart' as _i6;
+import 'package:widgetbook_workspace/molecules/widget_version_box.dart' as _i10;
+import 'package:widgetbook_workspace/organics/widget_poke_nav_bar.dart' as _i3;
+import 'package:widgetbook_workspace/organics/widget_user_form.dart' as _i9;
 
 final directories = <_i1.WidgetbookNode>[
   _i1.WidgetbookFolder(
@@ -29,38 +33,59 @@ final directories = <_i1.WidgetbookNode>[
         ),
       ),
       _i1.WidgetbookLeafComponent(
+        name: 'PokeNavBar',
+        useCase: _i1.WidgetbookUseCase(
+          name: 'Nav bar',
+          builder: _i3.buildPokeNavBarUseCase,
+        ),
+      ),
+      _i1.WidgetbookLeafComponent(
         name: 'PokedexBox',
         useCase: _i1.WidgetbookUseCase(
           name: 'Pokedexbox',
-          builder: _i3.buildPokedexBoxUseCase,
+          builder: _i4.buildPokedexBoxUseCase,
+        ),
+      ),
+      _i1.WidgetbookLeafComponent(
+        name: 'SearchPokemon',
+        useCase: _i1.WidgetbookUseCase(
+          name: 'Search pokemon with search bar',
+          builder: _i5.buildSearchPokemonUseCase,
+        ),
+      ),
+      _i1.WidgetbookLeafComponent(
+        name: 'StatPokemon',
+        useCase: _i1.WidgetbookUseCase(
+          name: 'Pokemon Stat',
+          builder: _i6.buildStatPokemonUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'TextMyPokedex',
         useCase: _i1.WidgetbookUseCase(
           name: 'Text in my pokedex',
-          builder: _i4.buildTextMyPokedexUseCase,
+          builder: _i7.buildTextMyPokedexUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'TypeChip',
         useCase: _i1.WidgetbookUseCase(
           name: 'User form',
-          builder: _i5.buildTypeChipUseCase,
+          builder: _i8.buildTypeChipUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'UserForm',
         useCase: _i1.WidgetbookUseCase(
           name: 'User form',
-          builder: _i6.buildUserFormUseCase,
+          builder: _i9.buildUserFormUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'VersionBox',
         useCase: _i1.WidgetbookUseCase(
           name: 'Versionbox',
-          builder: _i7.buildVersionBoxUseCase,
+          builder: _i10.buildVersionBoxUseCase,
         ),
       ),
     ],
