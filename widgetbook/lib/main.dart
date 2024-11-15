@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-import 'main.directories.g.dart';
+import 'atoms/atoms_category.dart';
+//import 'main.directories.g.dart';
+import 'molecules/molecules_category.dart';
+import 'organics/organics_category.dart';
 
 void main() {
   runApp(const WidgetbookApp());
@@ -23,10 +26,25 @@ class WidgetbookApp extends StatelessWidget {
             ],
           initialDevice: Devices.ios.iPhone13,
         ),
+        MaterialThemeAddon(
+          themes: [
+            WidgetbookTheme(
+              name: 'Light',
+              data: ThemeData.light(),
+            ),
+            WidgetbookTheme(
+              name: 'Dark',
+              data: ThemeData.dark(),
+            ),
+          ],
+        )
       ],
         directories: [
-          ...directories
-        ],
+          //...directories,
+          atomsCategory,
+          moleculesCategory,
+          organicsCategory,
+      ],
     );
   }
 }
