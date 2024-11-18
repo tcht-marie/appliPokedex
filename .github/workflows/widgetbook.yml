@@ -23,7 +23,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: widgetbook/build/web
-          retention-days: 1
 
   deploy-widgetbook:
     needs: build-widgetbook
