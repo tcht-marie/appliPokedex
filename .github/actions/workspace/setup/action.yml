@@ -9,6 +9,3 @@ runs:
         flutter-version: '3.24.0'
         channel: stable
         cache: true
-    - name: Requirement
-      run: dart tools/requirement_install.dart --ci
-      shell: bash
