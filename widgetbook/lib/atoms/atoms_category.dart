@@ -10,9 +10,6 @@ import 'package:widgetbook_workspace/atoms/widget_type_chip.dart';
 final atomsCategory = WidgetbookPackage(
     name: 'Atoms',
     children: [
-      /*WidgetbookUseCase(
-          name: 'Evo species',
-          builder: (context) => buildEvoSpeciesUseCase(context)),*/
       WidgetbookUseCase(
           name: 'Linear stat',
           builder: (context) => buildLinearStatUseCase(context)),
