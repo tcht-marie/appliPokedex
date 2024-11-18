@@ -18,6 +18,7 @@ Widget buildEvoSpeciesUseCase(BuildContext context) {
     imageUrl:
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
   );
+
   Pokemon ivysaur = (
     id: 2,
     idLabel: "#0002",
@@ -25,6 +26,7 @@ Widget buildEvoSpeciesUseCase(BuildContext context) {
     imageUrl:
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png"
   );
+
   Pokemon venusaur = (
     id: 3,
     idLabel: "#0003",
@@ -32,9 +34,11 @@ Widget buildEvoSpeciesUseCase(BuildContext context) {
     imageUrl:
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png"
   );
+
   EvolvesTo evolvesTo = EvolvesTo([
     EvolvesTo([EvolvesTo([], venusaur)], ivysaur)
   ], bulbi);
+
   CompletePokemon bulbasaur = (
     id: 1,
     idLabel: "#0001",
@@ -59,9 +63,8 @@ Widget buildEvoSpeciesUseCase(BuildContext context) {
     abilities: ["Overgrow", "Chlorophyll"],
     evolutionChain: (evolvesTo: evolvesTo)
   );
+
   return Scaffold(
-    body: Center(child: EvoChip(pokemon: bulbasaur)
-        //EvoSpecies(evolvesTo: evolvesTo),
-        ),
+    body: Center(child: EvoChip(pokemon: bulbasaur)),
   );
 }
