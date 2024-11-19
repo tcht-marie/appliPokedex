@@ -73,3 +73,16 @@ Un widgetbook est disponible : https://tcht-marie.github.io/appliPokedex/
 
 - [Online documentation](https://docs.flutter.dev/data-and-backend/serialization/json)
 - [Package](https://pub.dev/packages/json_serializable)
+
+8. Integration test
+
+- [Online documentation](https://docs.flutter.dev/testing/integration-tests)
+- [Mockito](https://docs.flutter.dev/cookbook/testing/unit/mocking)
+- [Article - Integration test with Robot Pattern](https://medium.com/flutter-community/how-to-write-integration-tests-in-flutter-like-no-other-using-the-robot-pattern-8edfd14dc081)
+
+9. Flutter Key (widget keys for integration test)
+
+- [Online doumentation](https://api.flutter.dev/flutter/foundation/Key-class.html)
+- [Article](https://medium.com/@yetesfadev/understanding-keys-in-dart-and-flutter-use-cases-examples-advantages-and-disadvantages-efff26b2d6e8)
+- [Article](https://www.geeksforgeeks.org/flutter-concept-of-key-in-widgets/)
+

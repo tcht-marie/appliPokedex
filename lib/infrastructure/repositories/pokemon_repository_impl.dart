@@ -94,7 +94,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<List<Pokemon>> searchPokedexByName(
       {required int limit, required int offset, required String query}) async {
-    // appel à la méthode factorisée pour rechercher pokemon par name
+    // appel à la méthode factorisée pour recherche pokemon par name
     return _pokemonInfraToPokemon("/pokemons/search",
         queryParameters: {"limit": limit, "offset": offset, "query": query});
   }

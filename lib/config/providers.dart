@@ -17,24 +17,26 @@ import '../notifier/authentication_notifier.dart';
 // provider == singleton
 // donc provider instancier qu'une fois ici mais dispo par injection (grâce à ref) partout où j'en ai besoin
 
+// création d'un fournisseur pour dio
 final dioProvider = Provider<Dio>((ref) {
+  // création d'un cookiejar pour stocker les cookies
   final cookieJar = CookieJar();
+  // définition de l'url de base pour les requêtes
   final dio = Dio(BaseOptions(
+    // avec validation de tous les statuts de réponses
       baseUrl: 'http://localhost:8080', validateStatus: (status) => true));
+  // ajout du gestionnaire de cookies à dio
   dio.interceptors.add(CookieManager(cookieJar));
+  // return l'instance de dio configurée
   return dio;
 });
 
+
+// fournisseurs définis pour les reop pokemon et authentication qui instancient les implémentations correspondantes avec les dépendances nécessaires
 final _pokemonRepositoryProvider = Provider<PokemonRepository>((ref) {
   PokemonRepository pokemonRepository =
       PokemonRepositoryImpl(PokemonMapper(), ref.read(dioProvider));
   return pokemonRepository;
-});
-
-final pokemonServiceProvider = Provider<PokemonService>((ref) {
-  PokemonService pokemonService =
-      PokemonServiceImpl(ref.read(_pokemonRepositoryProvider));
-  return pokemonService;
 });
 
 final _authRepositoryProvider = Provider<AuthenticationRepository>((ref) {
@@ -43,12 +45,20 @@ final _authRepositoryProvider = Provider<AuthenticationRepository>((ref) {
   return authenticationRepository;
 });
 
+// fournisseurs définis pour les services pokémon et authentication reliant les services aux repo
+final pokemonServiceProvider = Provider<PokemonService>((ref) {
+  PokemonService pokemonService =
+  PokemonServiceImpl(ref.read(_pokemonRepositoryProvider));
+  return pokemonService;
+});
+
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
   AuthenticationService authenticationService =
       AuthenticationServiceImpl(ref.read(_authRepositoryProvider));
   return authenticationService;
 });
 
+// fournisseur créé permettant de gérer l'état d'authentication du user
 final authenticationNotifierProvider =
     AsyncNotifierProvider<AuthenticationNotifier, void>(
         AuthenticationNotifier.new);
