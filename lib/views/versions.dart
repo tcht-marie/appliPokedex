@@ -16,7 +16,6 @@ class Versions extends ConsumerWidget {
         appBar: AppBar(
           title: Text(
             "Versions",
-            // TODO : voir pour ne pas devoir surcharger le style ici (AppBarTheme)
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),

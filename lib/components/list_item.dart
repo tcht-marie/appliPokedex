@@ -11,15 +11,15 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: PokedexColors.identity,
-      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+      color: PokedexColors.ground,
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(4),
       ),
       child: ListTile(
           title: Text(
               style: TextStyle(
-                color: PokedexColors.grayScale[100],
+                color: PokedexColors.grayScale[000],
                 fontWeight: FontWeight.bold,
                 height: 1.5,
               ),

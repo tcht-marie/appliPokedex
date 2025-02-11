@@ -28,6 +28,7 @@ class MyPokedex extends ConsumerWidget {
           future: ref.watch(pokemonServiceProvider).getTrainerPokedex(),
           builder:
               (BuildContext context, AsyncSnapshot<List<Pokemon>> snapshot) {
+            // TODO : voir async value (onData, onError...)
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {

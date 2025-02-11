@@ -208,6 +208,8 @@ class _PokedexState extends ConsumerState<Pokedex> {
                                             .read(pokemonServiceProvider)
                                             .addPokemonToPokedexTrainer(
                                                 pokedex.id);
+                                        ref.refresh(pokemonServiceProvider)
+                                            .getTrainerPokedex();
                                       },
                                       icon: const Icon(Icons.add))
                                   : null);

@@ -6,6 +6,7 @@ import 'package:poke/config/providers.dart';
 import 'package:poke/core/widget_keys.dart';
 import 'package:poke/domain/models/item_details.dart';
 
+import '../components/logout.dart';
 import '../components/poke_nav_bar.dart';
 
 class Items extends ConsumerStatefulWidget {
