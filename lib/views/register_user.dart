@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:poke/components/user_form.dart';
+import 'package:poke/components/organisms/user_form.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/core/widget_keys.dart';
 
-import '../components/poke_nav_bar.dart';
+import '../components/organisms/poke_nav_bar.dart';
 
 class RegisterUser extends ConsumerWidget {
   const RegisterUser({super.key});
@@ -21,7 +20,7 @@ class RegisterUser extends ConsumerWidget {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            key: WidgetKeys.loginErrorSnackBar,
+              key: WidgetKeys.loginErrorSnackBar,
               content: Text('Registration failed. Please try again.')),
         );
       }

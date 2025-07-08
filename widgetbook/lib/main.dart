@@ -3,9 +3,8 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 import 'atoms/atoms_category.dart';
-//import 'main.directories.g.dart';
 import 'molecules/molecules_category.dart';
-import 'organics/organics_category.dart';
+import 'organisms/organics_category.dart';
 
 void main() {
   runApp(const WidgetbookApp());
@@ -20,10 +19,10 @@ class WidgetbookApp extends StatelessWidget {
     return Widgetbook.material(
       addons: [
         DeviceFrameAddon(
-            devices: [
-              ...Devices.ios.all,
-              ...Devices.android.all,
-            ],
+          devices: [
+            ...Devices.ios.all,
+            ...Devices.android.all,
+          ],
           initialDevice: Devices.ios.iPhone13,
         ),
         MaterialThemeAddon(
@@ -39,11 +38,11 @@ class WidgetbookApp extends StatelessWidget {
           ],
         )
       ],
-        directories: [
-          //...directories,
-          atomsCategory,
-          moleculesCategory,
-          organicsCategory,
+      directories: [
+        //...directories,
+        atomsCategory,
+        moleculesCategory,
+        organicsCategory,
       ],
     );
   }

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:poke/components/version_box.dart';
+import 'package:poke/components/organisms/version_box.dart';
 
-import '../components/poke_nav_bar.dart';
+import '../components/organisms/poke_nav_bar.dart';
 import '../config/providers.dart';
 import '../domain/models/version.dart';
 
 class Versions extends ConsumerWidget {
-
   const Versions({super.key});
 
   @override

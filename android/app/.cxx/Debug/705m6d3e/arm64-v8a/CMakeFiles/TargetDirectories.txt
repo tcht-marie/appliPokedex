@@ -1,0 +1,2 @@
+/Users/57526N/workspace/appliPokedex/android/app/.cxx/Debug/705m6d3e/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/57526N/workspace/appliPokedex/android/app/.cxx/Debug/705m6d3e/arm64-v8a/CMakeFiles/edit_cache.dir

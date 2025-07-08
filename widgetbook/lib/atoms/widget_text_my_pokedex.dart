@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poke/components/text_my_pokedex.dart';
+import 'package:poke/components/atoms/text_my_pokedex.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 

@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:poke/components/features.dart';
+import 'package:poke/components/molecules/features.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -14,7 +13,7 @@ Widget buildFeaturesUseCase(BuildContext context) {
   ]);
 
   String label = context.knobs.string(label: 'Label', initialValue: 'Weight');
-  
+
   return Scaffold(
     body: Column(
       mainAxisAlignment: MainAxisAlignment.center,

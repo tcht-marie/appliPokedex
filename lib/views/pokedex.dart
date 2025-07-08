@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:poke/components/search_pokemon.dart';
+import 'package:poke/components/molecules/search_pokemon.dart';
 import 'package:poke/config/colors.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/domain/models/pokemon.dart';
 
-import '../components/poke_nav_bar.dart';
-import '../components/pokedex_box.dart';
+import '../components/molecules/pokedex_box.dart';
+import '../components/organisms/poke_nav_bar.dart';
 
 class Pokedex extends ConsumerStatefulWidget {
   const Pokedex({super.key});
@@ -208,7 +208,8 @@ class _PokedexState extends ConsumerState<Pokedex> {
                                             .read(pokemonServiceProvider)
                                             .addPokemonToPokedexTrainer(
                                                 pokedex.id);
-                                        ref.refresh(pokemonServiceProvider)
+                                        ref
+                                            .refresh(pokemonServiceProvider)
                                             .getTrainerPokedex();
                                       },
                                       icon: const Icon(Icons.add))

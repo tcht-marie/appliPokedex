@@ -1,9 +1,8 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:poke/components/pokedex_box.dart';
+import 'package:poke/components/molecules/pokedex_box.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/main.dart';
 
@@ -119,11 +118,11 @@ void main() {
     });
     mockDio.interceptors.add(mockPokemon);
 
-    final container = ProviderContainer(overrides: [
-      dioProvider.overrideWithValue(mockDio)
-    ]);
+    final container =
+        ProviderContainer(overrides: [dioProvider.overrideWithValue(mockDio)]);
 
-    await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const MyApp()));
+    await tester.pumpWidget(
+        UncontrolledProviderScope(container: container, child: const MyApp()));
     await tester.pump(const Duration(seconds: 5));
     expect(find.byType(PokedexBox), findsNWidgets(1));
     await pokemonRobot.goToCompletePokemon();

@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:poke/components/list_item.dart';
-import 'package:poke/components/type_chip.dart';
+import 'package:poke/components/atoms/list_item.dart';
+import 'package:poke/components/atoms/type_chip.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/core/widget_keys.dart';
 
-import '../components/poke_nav_bar.dart';
+import '../components/organisms/poke_nav_bar.dart';
 import '../domain/models/move_details.dart';
 
 class Moves extends ConsumerStatefulWidget {

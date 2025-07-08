@@ -2,12 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:poke/components/pokedex_box.dart';
+import 'package:poke/components/molecules/pokedex_box.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/main.dart';
 
 import '../test/interceptor_test.dart';
-import 'robots/pokemon_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

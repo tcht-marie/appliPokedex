@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:poke/components/logout.dart';
-import 'package:poke/components/pokedex_box.dart';
-import 'package:poke/components/text_my_pokedex.dart';
+import 'package:poke/components/atoms/logout.dart';
+import 'package:poke/components/atoms/text_my_pokedex.dart';
+import 'package:poke/components/molecules/pokedex_box.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/core/widget_keys.dart';
 
-import '../components/poke_nav_bar.dart';
+import '../components/organisms/poke_nav_bar.dart';
 import '../config/colors.dart';
 import '../domain/models/pokemon.dart';
 

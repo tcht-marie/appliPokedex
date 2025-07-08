@@ -1,9 +1,8 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:poke/components/version_box.dart';
+import 'package:poke/components/organisms//version_box.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/main.dart';
 

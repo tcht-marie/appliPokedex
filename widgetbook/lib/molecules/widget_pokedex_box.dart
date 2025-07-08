@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poke/components/pokedex_box.dart';
+import 'package:poke/components/molecules/pokedex_box.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 

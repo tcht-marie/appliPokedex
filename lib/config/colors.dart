@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:poke/domain/models/pokemon_types.dart';
 
@@ -14,7 +12,6 @@ Color hexToColor(String hex) {
 }
 
 class PokedexColors {
-
   static Color colorTypes(PokemonTypes pokeTypes) {
     return switch (pokeTypes) {
       PokemonTypes.bug => bug,

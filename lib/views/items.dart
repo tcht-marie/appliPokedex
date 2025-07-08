@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:poke/components/list_item.dart';
+import 'package:poke/components/atoms/list_item.dart';
 import 'package:poke/config/providers.dart';
 import 'package:poke/core/widget_keys.dart';
 import 'package:poke/domain/models/item_details.dart';
 
-import '../components/logout.dart';
-import '../components/poke_nav_bar.dart';
+import '../components/organisms/poke_nav_bar.dart';
 
 class Items extends ConsumerStatefulWidget {
   // constructeur
@@ -136,8 +135,7 @@ class _ItemsState extends ConsumerState<Items> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Column(
-          children: [
+          : Column(children: [
               Expanded(
                   child: ListView.builder(
                       key: WidgetKeys.items,

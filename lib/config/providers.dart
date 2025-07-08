@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke/domain/repositories/authentication_repository.dart';
 import 'package:poke/domain/repositories/pokemon_repository.dart';
 import 'package:poke/domain/services/authentication_service.dart';
@@ -23,16 +23,16 @@ final dioProvider = Provider<Dio>((ref) {
   final cookieJar = CookieJar();
   // définition de l'url de base pour les requêtes
   final dio = Dio(BaseOptions(
-    // avec validation de tous les statuts de réponses
-      baseUrl: 'http://localhost:8080', validateStatus: (status) => true));
+      // avec validation de tous les statuts de réponses
+      baseUrl: 'http://localhost:8080',
+      validateStatus: (status) => true));
   // ajout du gestionnaire de cookies à dio
   dio.interceptors.add(CookieManager(cookieJar));
   // return l'instance de dio configurée
   return dio;
 });
 
-
-// fournisseurs définis pour les reop pokemon et authentication qui instancient les implémentations correspondantes avec les dépendances nécessaires
+// fournisseurs définis pour les repo pokemon et authentication qui instancient les implémentations correspondantes avec les dépendances nécessaires
 final _pokemonRepositoryProvider = Provider<PokemonRepository>((ref) {
   PokemonRepository pokemonRepository =
       PokemonRepositoryImpl(PokemonMapper(), ref.read(dioProvider));
@@ -48,7 +48,7 @@ final _authRepositoryProvider = Provider<AuthenticationRepository>((ref) {
 // fournisseurs définis pour les services pokémon et authentication reliant les services aux repo
 final pokemonServiceProvider = Provider<PokemonService>((ref) {
   PokemonService pokemonService =
-  PokemonServiceImpl(ref.read(_pokemonRepositoryProvider));
+      PokemonServiceImpl(ref.read(_pokemonRepositoryProvider));
   return pokemonService;
 });
 
