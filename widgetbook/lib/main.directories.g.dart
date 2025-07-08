@@ -18,10 +18,10 @@ import 'package:widgetbook_workspace/atoms/widget_type_chip.dart' as _i12;
 import 'package:widgetbook_workspace/molecules/widget_features.dart' as _i3;
 import 'package:widgetbook_workspace/molecules/widget_pokedex_box.dart' as _i8;
 import 'package:widgetbook_workspace/molecules/widget_search_pokemon.dart'
-as _i9;
+    as _i9;
 import 'package:widgetbook_workspace/molecules/widget_stat_pokemon.dart'
-as _i10;
-import 'package:widgetbook_workspace/organisms/widget_evo_species.dart' as _i2 as _i10;
+    as _i10;
+import 'package:widgetbook_workspace/organisms/widget_evo_species.dart' as _i2;
 import 'package:widgetbook_workspace/organisms/widget_poke_nav_bar.dart' as _i7;
 import 'package:widgetbook_workspace/organisms/widget_user_form.dart' as _i13;
 
