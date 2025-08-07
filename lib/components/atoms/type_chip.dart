@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/pokemon_types.dart';
+import '../../config/colors.dart';
 
 class TypeChip extends StatelessWidget {
   final PokemonTypes type;

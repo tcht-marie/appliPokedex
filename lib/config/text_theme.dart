@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:poke/config/colors.dart';
+import '../config/colors.dart';
 
 class TextThemeConfig {
   static TextTheme textTheme(TextTheme baseTextTheme, ColorScheme colorScheme) {
-
     final headline = TextStyle(
         fontWeight: FontWeight.w700, color: PokedexColors.grayScale[100]);
 

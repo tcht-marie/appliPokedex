@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:poke/config/colors.dart';
 import 'package:poke/core/widget_keys.dart';
+import '../../config/colors.dart';
 
 class PokedexBox extends StatelessWidget {
   final String idLabel;

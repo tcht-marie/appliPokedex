@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poke/components/organisms//poke_nav_bar.dart';
+import 'package:poke/components/organisms/poke_nav_bar.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 

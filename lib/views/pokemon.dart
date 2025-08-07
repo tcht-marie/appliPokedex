@@ -5,11 +5,11 @@ import 'package:poke/components/atoms/type_chip.dart';
 import 'package:poke/components/molecules/features.dart';
 import 'package:poke/components/organisms/evo_chip.dart';
 import 'package:poke/components/organisms/poke_nav_bar.dart';
-import 'package:poke/config/colors.dart';
 import 'package:poke/domain/models/complete_pokemon.dart';
 
 import '../components/molecules/stat_pokemon.dart';
 import '../config/providers.dart';
+import '../config/colors.dart';
 
 class PokemonComplete extends ConsumerStatefulWidget {
   final String pokemonId;
