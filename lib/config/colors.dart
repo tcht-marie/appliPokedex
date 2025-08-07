@@ -58,7 +58,7 @@ class PokedexColors {
   static Color stellar = hexToColor('#00e6e6');
   static Color water = hexToColor('#6493EB');
 
-  static ColorSwatch grayScale = ColorSwatch(hexToColor('#E0E0E0').value, {
+  static ColorSwatch grayScale = ColorSwatch(hexToColor('#E0E0E0').toARGB32(), {
     000: hexToColor('#212121'),
     025: hexToColor('#666666'),
     050: hexToColor('#E0E0E0'),

@@ -3,7 +3,7 @@ import 'package:widgetbook_workspace/organisms/widget_evo_species.dart';
 import 'package:widgetbook_workspace/organisms/widget_poke_nav_bar.dart';
 import 'package:widgetbook_workspace/organisms/widget_user_form.dart';
 
-final organicsCategory = WidgetbookPackage(name: 'Organics', children: [
+final organismsCategory = WidgetbookPackage(name: 'Organics', children: [
   WidgetbookUseCase(
       name: 'Evo species',
       builder: (context) => buildEvoSpeciesUseCase(context)),

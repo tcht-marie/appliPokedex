@@ -115,6 +115,7 @@ class _PokedexState extends ConsumerState<Pokedex> {
         if (kDebugMode) {
           print('Something went wrong!');
         }
+        const Text("Something went wrong");
       }
       setState(() {
         // fin du chargement supplémentaire

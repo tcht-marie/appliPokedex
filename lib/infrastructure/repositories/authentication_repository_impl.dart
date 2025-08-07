@@ -7,9 +7,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   // constructeur qui initialise l'instance de Dio pour effectuer les requêtes HTTP
   AuthenticationRepositoryImpl(this.dio);
 
+  /// Requête POST pour connecter un utilisateur
   @override
   Future<bool> login(String username, String password) async {
-    // requête POST pour l'authentication
     Response response = await dio.post("/auth/login", data: '''{
         "username": "$username",
         "password": "$password"
@@ -21,23 +21,23 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     }
   }
 
+  /// Requête POST pour enregister un utilisateur
   @override
   Future<bool> register(String username, String password) async {
-    // rquête POST pour enregistrer un user
     Response response = await dio.post("/auth/register", data: '''{
         "username": "$username",
         "password": "$password"
             }''');
     if (response.statusCode == 200) {
-      return true; // enregistrement réussi
+      return true;
     } else {
-      return false; // échec
+      return false;
     }
   }
 
+  /// Requête GET pour déconnecter un utilisateur
   @override
   Future<bool> logout() async {
-    // requête GET pour la déconnexion
     Response response = await dio.get("/logout");
     if (response.statusCode == 200) {
       return true;

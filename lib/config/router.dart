@@ -1,4 +1,3 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poke/config/providers.dart';
@@ -12,33 +11,28 @@ import 'package:poke/views/register_user.dart';
 import '../views/login.dart';
 import '../views/versions.dart';
 
-// création d'un fournisseur pour la config du router
+/// Provider pour la configuration du router
+/// Injection du notifier d'authentification
+/// Et retourne une instance de GoRouter
 final goRouterProvider = Provider<GoRouter>((ref) {
-  // récup du notifier d'authentification
   final notifier = ref.read(authenticationNotifierProvider.notifier);
 
-  // création d'une instance de GoRouter
   return GoRouter(
     // écoute les changements d'états du notifier
     refreshListenable: notifier,
-    // route initiale
     initialLocation: '/pokedex',
     // redirection basée sur l'état du user
     redirect: (context, state) {
       if (state.matchedLocation == "/mypokedex") {
-        // si user connecté, pas de redirection
         if (notifier.isLoggedIn) {
-          return null;
+          return null; // si user connecté, pas de redirection
         } else {
-          // sinon redirige vers la page de login
-          return "/login";
+          return "/login"; // sinon redirige vers la page de login
         }
-        // pas de redirection pour les autres routes
       } else {
-        return null;
+        return null; // pas de redirection pour les autres routes
       }
     },
-    // définition des routes
     routes: [
       GoRoute(path: '/pokedex', builder: (context, state) => const Pokedex()),
       GoRoute(path: '/versions', builder: (context, state) => const Versions()),
@@ -51,7 +45,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: '/register', builder: (context, state) => const RegisterUser()),
       GoRoute(path: '/login', builder: (context, state) => const Login()),
-      GoRoute(path: '/mypokedex', builder: (context, state) => const MyPokedex()),
+      GoRoute(
+          path: '/mypokedex', builder: (context, state) => const MyPokedex()),
     ],
   );
 });

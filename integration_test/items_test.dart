@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,9 +10,9 @@ import '../test/interceptor_test.dart';
 import 'robots/items_robot.dart';
 
 // TODO : problème
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
   late ItemsRobot itemsRobot;
 
   testWidgets("Display Items page", (tester) async {
@@ -41,6 +40,7 @@ void main() {
         }
       }
     });
+
     mockDio.interceptors.add(mockItems);
 
     final container = ProviderContainer(overrides: [

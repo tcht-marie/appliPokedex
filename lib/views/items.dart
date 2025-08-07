@@ -8,38 +8,29 @@ import 'package:poke/domain/models/item_details.dart';
 
 import '../components/organisms/poke_nav_bar.dart';
 
+/// Widget avec state et  utilise riverpod  via ConsumerStateWidget
+/// Affiche une liste d'objet ItemDetails et utilise un ScrollController
 class Items extends ConsumerStatefulWidget {
-  // constructeur
   const Items({super.key});
 
   @override
   ConsumerState<Items> createState() => _ItemsState();
 }
 
-// état associé au StatefulWidget Items
+/// État associé au ConsumerStatefulWidget Items
 class _ItemsState extends ConsumerState<Items> {
-  // limite du nombre d'éléments par page
+  // variables d'état
   static const int _limit = 20;
-
-  // offset pour la pagination
   int _offset = 0;
-
-  // pour savoir s'il y a une page suivante
   bool _hasNextPage = true;
-
-  // chargement initial
   bool _isFirstLoadRunning = false;
-
-  // chargement supplémentaire
   bool _isLoadMoreRunning = false;
 
-  // liste des éléments chargés
-  List<ItemDetails> _items = [];
+  List<ItemDetails> _items = []; // liste des éléments chargés
 
   // fonction pour charger les premiers éléments
   void _firstLoad() async {
     setState(() {
-      // début du chargement initial
       _isFirstLoadRunning = true;
     });
     try {
@@ -48,37 +39,31 @@ class _ItemsState extends ConsumerState<Items> {
           .read(pokemonServiceProvider)
           .getItemDetailsByPage(limit: _limit, offset: _offset);
       setState(() {
-        // mise à jour de la liste d'éléments
-        _items = itemPage;
+        _items = itemPage; // mise à jour de la liste d'éléments
       });
     } catch (error) {
       if (kDebugMode) {
-        // message d'erreur en mode debug
         print('Something went wrong');
       }
     }
     setState(() {
-      // fin du chargement initial
-      _isFirstLoadRunning = false;
+      _isFirstLoadRunning = false; // fin du chargement initial
     });
   }
 
-  // controller pour le scroll
+  // initialisation du controller pour le scroll
   late ScrollController _controller;
 
   // fonction pour charger plus d'éléments lors du scroll
   void _loadMore() async {
-    // s'il y a une page suivante &
     if (_hasNextPage &&
         _isFirstLoadRunning == false &&
         _isLoadMoreRunning == false &&
         _controller.position.extentAfter < 300) {
       setState(() {
-        // début du chargement supplémentaire
         _isLoadMoreRunning = true;
       });
-      // mise à jour de l'offset
-      _offset += _limit;
+      _offset += _limit; // mise à jour de l'offset
       try {
         // récupération des éléments en appelant le pokemonService avec l'offset modifié
         final itemPage = await ref
@@ -100,8 +85,7 @@ class _ItemsState extends ConsumerState<Items> {
         }
       }
       setState(() {
-        // fin du chargement supplémentaire
-        _isLoadMoreRunning = false;
+        _isLoadMoreRunning = false; // fin du chargement supplémentaire
       });
     }
   }
@@ -139,9 +123,7 @@ class _ItemsState extends ConsumerState<Items> {
               Expanded(
                   child: ListView.builder(
                       key: WidgetKeys.items,
-                      // controller
                       controller: _controller,
-                      // nombre d'éléments dans la liste
                       itemCount: _items.length,
                       itemBuilder: (BuildContext context, index) {
                         final item = _items[index];

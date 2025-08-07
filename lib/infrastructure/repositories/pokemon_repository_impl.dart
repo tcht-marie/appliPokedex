@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:poke/domain/models/complete_pokemon.dart';
 import 'package:poke/domain/models/evolution_chain.dart';
 import 'package:poke/domain/models/item_details.dart';
 import 'package:poke/domain/models/move_details.dart';
 import 'package:poke/domain/models/pokemon.dart';
-import 'package:poke/domain/models/complete_pokemon.dart';
 import 'package:poke/domain/models/pokemon_stat.dart';
 import 'package:poke/domain/models/pokemon_types.dart';
 import 'package:poke/domain/models/version.dart';
@@ -13,10 +13,12 @@ import 'package:poke/infrastructure/models/item_details_infra.dart';
 import 'package:poke/infrastructure/models/move_details_infra.dart';
 import 'package:poke/infrastructure/models/pokemon_infra.dart';
 import 'package:poke/infrastructure/models/version_infra.dart';
+
 import 'mapper/pokemon_mapper.dart';
 
+/// Classe qui implémente l'abstract class PokemonRepository
+/// appels HTTP au backend et transformation des données vers le domain si nécessaire
 class PokemonRepositoryImpl implements PokemonRepository {
-  // initialisation de Dio avec l'url de base
   final Dio dio;
 
   final PokemonMapper pokemonMapper;
@@ -24,35 +26,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
   // constructeur
   PokemonRepositoryImpl(this.pokemonMapper, this.dio);
 
-  /*@override
-  Future<List<Pokemon>> findPokemonsByPage(
-      {required int limit, required int offset}) async {
-    Response response =
-        // appel au back (baseUrl) pour récup pokemon avec pagination
-        await dio.get("", queryParameters: {"limit": limit, "offset": offset});
-    // si appel ok et non null
-    if (response.statusCode == 200 && response.data != null) {
-      // si les data sont une liste
-      return response.data is List
-          // alors on les traite comme une liste (== liste d'objet json)
-          ? (response.data as List<dynamic>)
-              // transformation de chaque élément json en objet pokemonInfra
-              .map<PokemonInfra>((element) => PokemonInfra.fromJson(element))
-              // transforme chaque pokemonInfra en pokemon (domain)
-              .map<Pokemon>((element) => (
-                    id: element.id,
-                    idLabel: element.idLabel,
-                    name: element.name,
-                    imageUrl: element.imageUrl
-                  ))
-              // convertit en liste (taille fixe)
-              .toList(growable: false)
-          // sinon return une liste vide (si les data ne sont pas une liste)
-          : [];
-    } else {
-      throw Exception("erreur lors de la récupération du pokedex");
-    }
-  }*/
   @override
   Future<List<Pokemon>> findPokemonsByPage(
       {required int limit, required int offset}) async {
@@ -168,11 +141,13 @@ class PokemonRepositoryImpl implements PokemonRepository {
     }
   }
 
+  /// Méthode asynchrone avec requête HTTP pour récupérer une liste ItemDetails
+  /// Pagination mise en place
   @override
   Future<List<ItemDetails>> findItemDetailsByPage(
       {required int limit, required int offset}) async {
-    // appel au back pour récup la liste des ItemDetails avec pagination
-    Response response = await dio.get("/pokemons/items?limit=$limit&offset=$offset");
+    Response response =
+        await dio.get("/pokemons/items?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)
@@ -197,7 +172,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<List<MoveDetails>> findMoveDetailsByPage(int limit, int offset) async {
     // appel au back pour récup une liste de MoveDetails avec pagination
-    Response response = await dio.get("/pokemons/moves?limit=$limit&offset=$offset");
+    Response response =
+        await dio.get("/pokemons/moves?limit=$limit&offset=$offset");
     if (response.statusCode == 200 && response.data != null) {
       return response.data is List
           ? (response.data as List<dynamic>)

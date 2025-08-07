@@ -1,4 +1,3 @@
-
 import 'package:poke/domain/repositories/authentication_repository.dart';
 import 'package:poke/domain/services/authentication_service.dart';
 
@@ -21,5 +20,4 @@ class AuthenticationServiceImpl implements AuthenticationService {
   Future<bool> register(String username, String password) {
     return authenticationRepository.register(username, password);
   }
-
 }

@@ -12,7 +12,7 @@ class PokeNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      indicatorColor: PokedexColors.identity.withOpacity(0.5),
+      indicatorColor: PokedexColors.identity.withValues(alpha: 0.5),
       selectedIndex: index,
       backgroundColor: PokedexColors.grayScale[075],
       destinations: [

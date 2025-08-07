@@ -14,9 +14,11 @@ class RegisterUser extends ConsumerWidget {
     if (formKey.currentState!.validate()) {
       final authNotifier = ref.read(authenticationNotifierProvider.notifier);
       final isRegistered = await authNotifier.register(username, password);
+      final login = await authNotifier.login(username, password);
 
       if (isRegistered) {
-        GoRouter.of(context).push('/login');
+        login;
+        GoRouter.of(context).push('/mypokedex');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -36,7 +38,6 @@ class RegisterUser extends ConsumerWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      /*appBar: MyAppBar(titlePage: "Register"),*/
       body: UserForm(
           submit: (username, password, formKey, context) =>
               _handleSubmit(username, password, formKey, context, ref)),

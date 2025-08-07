@@ -21,7 +21,7 @@ class StatPokemon extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(

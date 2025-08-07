@@ -4,7 +4,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 import 'atoms/atoms_category.dart';
 import 'molecules/molecules_category.dart';
-import 'organisms/organics_category.dart';
+import 'organisms/organisms_category.dart';
 
 void main() {
   runApp(const WidgetbookApp());
@@ -42,7 +42,7 @@ class WidgetbookApp extends StatelessWidget {
         //...directories,
         atomsCategory,
         moleculesCategory,
-        organicsCategory,
+        organismsCategory,
       ],
     );
   }
